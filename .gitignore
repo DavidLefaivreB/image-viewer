@@ -1,0 +1,5 @@
+
+ImageBrowser/obj/*
+ImageBrowser/bin/*
+.vs/ImageBrowser/*
+.idea/.idea.ImageBrowser/.idea/

@@ -32,40 +32,14 @@ namespace ImageBrowser.Ui
             AddThumbnail(@"D:\patreon\aliceRauch\thumbnail\unnamed_sfw.jpg", "Unnamed");
             AddThumbnail(@"D:\patreon\aliceRauch\thumbnail\zelda_sfw.jpg", "Zelda");
         }
-
-        List<PictureThumbnail> thumbnails = new List<PictureThumbnail>();
-
+        
         void AddThumbnail(string path, string name)
         {
             PictureThumbnail pictureThumbnail = new PictureThumbnail();
             pictureThumbnail.Path = path;
             pictureThumbnail.Description = name;
 
-            thumbnails.Add(pictureThumbnail);
-        }
-
-        private void onCanvasClick(object sender, MouseButtonEventArgs e)
-        {
-            Point position = e.GetPosition(this);
-        }
-
-        private void onControlSizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            thumbnailContainer.Children.Clear();
-            var nbThumbnailsByRow = (int)e.NewSize.Width / 200;
-            
-            for (var i = 0; i < thumbnails.Count; i++)
-            {
-                var rowIndex = i / nbThumbnailsByRow;
-                var columnIndex = i - rowIndex * nbThumbnailsByRow;
-
-                Canvas.SetLeft(thumbnails[i], columnIndex * 200 + 20);
-                Canvas.SetTop(thumbnails[i], rowIndex * 200);
-                thumbnailContainer.Children.Add(thumbnails[i]);
-            }
-
-            thumbnailContainer.Height = thumbnails.Count / nbThumbnailsByRow * 200 + 240;
-            scroller.Height = e.NewSize.Height;
+            thumbnailContainer.addThumbnail(pictureThumbnail);
         }
     }
 }

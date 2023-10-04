@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -59,6 +59,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Ui\Constants.cs" />
     <Page Include="Ui\CentralPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -67,7 +68,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Ui\Component\TileCanvas.xaml" />
+    <Page Include="Ui\Component\ThumbnailsContainer.xaml" />
     <Page Include="Ui\Component\TitleBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -86,8 +87,8 @@
     <Compile Include="Ui\Component\PictureThumbnail.xaml.cs">
       <DependentUpon>PictureThumbnail.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Ui\Component\TileCanvas.xaml.cs">
-      <DependentUpon>TileCanvas.xaml</DependentUpon>
+    <Compile Include="Ui\Component\ThumbnailsContainer.xaml.cs">
+      <DependentUpon>ThumbnailsContainer.xaml</DependentUpon>
     </Compile>
     <Compile Include="Ui\Component\TitleBar.xaml.cs">
       <DependentUpon>TitleBar.xaml</DependentUpon>

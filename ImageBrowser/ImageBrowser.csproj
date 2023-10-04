@@ -36,7 +36,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>taskIcon.ico</ApplicationIcon>
+    <ApplicationIcon>Assets/taskIcon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -134,10 +134,10 @@
     <Resource Include="Assets\appIcon.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="taskIcon.ico" />
+    <Resource Include="Assets\background.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Assets\background.png" />
+    <Content Include="Assets\taskIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

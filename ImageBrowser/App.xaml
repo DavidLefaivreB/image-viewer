@@ -4,6 +4,7 @@
              StartupUri="Ui/MainWindow.xaml">
     <Application.Resources>
         <SolidColorBrush x:Key="PrimaryColor">DeepSkyBlue</SolidColorBrush>
+        <SolidColorBrush x:Key="CloseButtonColor">#ED4125</SolidColorBrush>
         <Style x:Key="TitleBarButtonStyle"
                TargetType="Button">
             <Setter Property="WindowChrome.IsHitTestVisibleInChrome"
@@ -48,7 +49,7 @@
                 <Trigger Property="IsMouseOver"
                          Value="True">
                     <Setter Property="Background"
-                            Value="#880000" />
+                            Value="{StaticResource CloseButtonColor}" />
                 </Trigger>
             </Style.Triggers>
         </Style>

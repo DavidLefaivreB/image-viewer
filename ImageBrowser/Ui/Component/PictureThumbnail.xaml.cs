@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Windows.Controls;
+using ImageBrowser.Model;
 
 namespace ImageBrowser.Ui.Component
 {
@@ -8,18 +9,12 @@ namespace ImageBrowser.Ui.Component
     /// </summary>
     public partial class PictureThumbnail : UserControl
     {
-        public string Path
+        public Picture Picture
         {
             get;
             set;
         }
-
-        public string Description
-        {
-            get;
-            set;
-        }
-
+        
         public PictureThumbnail()
         {
             InitializeComponent();
@@ -29,7 +24,7 @@ namespace ImageBrowser.Ui.Component
         private void onThumbnailClicked(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             if (e.ClickCount > 1)
-                Process.Start(Path);
+                Process.Start(Picture.ImagePath);
         }
     }
 }

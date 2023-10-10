@@ -24,9 +24,9 @@
             </Style>
         </Grid.Style>
         <Image Margin="10,  5"
-               Source="{Binding Path}"/>
+               Source="{Binding Picture.ThumbnailPath}"/>
         <Label Grid.Row="1"
-               Content="{Binding Description}" 
+               Content="{Binding Picture.Name}" 
                HorizontalAlignment="Center"
                Foreground="White"/>
     </Grid>

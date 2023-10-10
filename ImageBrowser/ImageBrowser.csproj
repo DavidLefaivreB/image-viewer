@@ -59,6 +59,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Picture.cs" />
+    <Compile Include="Notifier\ThumbnailsListener.cs" />
+    <Compile Include="Notifier\ThumbnailToDisplayNotifier.cs" />
+    <Compile Include="Repository\CategoryRepository.cs" />
+    <Compile Include="Repository\CategoryType.cs" />
+    <Compile Include="Repository\PictureRepository.cs" />
     <Compile Include="Ui\Constants.cs" />
     <Compile Include="Ui\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

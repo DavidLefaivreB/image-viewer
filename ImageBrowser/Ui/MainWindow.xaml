@@ -32,9 +32,9 @@
                 <ColumnDefinition Width="*" MinWidth="300" />
             </Grid.ColumnDefinitions>
             <Rectangle Grid.Column="1" Fill="Black" />
-            <u:RightPanel Grid.Column="2" />
+            <u:RightPanel x:Name="rightPanel" Grid.Column="2" />
 
-            <u:CentralPanel Grid.Column="0" />
+            <u:CentralPanel x:Name="thumbnailPanel" Grid.Column="0" />
 
             <GridSplitter Grid.Column="1"
                           HorizontalAlignment="Stretch"

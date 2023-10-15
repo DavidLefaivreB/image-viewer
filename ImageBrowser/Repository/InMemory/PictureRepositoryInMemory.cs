@@ -4,7 +4,7 @@ using static ImageBrowser.Repository.CategoryType;
 
 namespace ImageBrowser.Repository
 {
-    public class PictureRepositoryInMemory
+    public class PictureRepositoryInMemory : PictureRepository
     {
         private List<Picture> pictures = new List<Picture>();
         

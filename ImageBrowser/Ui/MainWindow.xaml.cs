@@ -1,4 +1,7 @@
 ﻿using System.Windows;
+using ImageBrowser.Controller;
+using ImageBrowser.Notifier;
+using ImageBrowser.Repository;
 
 namespace ImageBrowser
 {
@@ -7,31 +10,37 @@ namespace ImageBrowser
     /// </summary>
     public partial class MainWindow : Window
     {
+        private PictureRepository _pictureRepository = new PictureRepositoryInMemory();
+        private ThumbnailToDisplayNotifier _thumbnailToDisplayNotifier = new ThumbnailToDisplayNotifier();
+
         public MainWindow()
         {
             InitializeComponent();
-        }
+            DataContext = this;
+            
+            _thumbnailToDisplayNotifier.AddListener(thumbnailPanel);
+            _thumbnailToDisplayNotifier.Notify(_pictureRepository.RetrieveAll());
 
+            ThumbnailsController thumbnailsController = new ThumbnailsController();
+            rightPanel.SetPictureRepository(thumbnailsController);
+        }
+        
         private void OnMinimizeButtonClick(object sender, RoutedEventArgs e)
         {
-            this.WindowState = WindowState.Minimized;
+            WindowState = WindowState.Minimized;
         }
 
         private void OnMaximizeRestoreButtonClick(object sender, RoutedEventArgs e)
         {
-            if (this.WindowState == WindowState.Maximized)
-            {
-                this.WindowState = WindowState.Normal;
-            }
+            if (WindowState == WindowState.Maximized)
+                WindowState = WindowState.Normal;
             else
-            {
-                this.WindowState = WindowState.Maximized;
-            }
+                WindowState = WindowState.Maximized;
         }
 
         private void OnCloseButtonClick(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            Close();
         }
     }
 }

@@ -24,7 +24,7 @@
         <Label
             Grid.Column="1"
             Grid.Row="1"
-            Content="Categorie"
+            Content="Category"
             Style="{StaticResource FontStyle}" />
         <Grid
             Grid.Column="1"

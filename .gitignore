@@ -1,5 +1,10 @@
 
 ImageBrowser/obj/*
 ImageBrowser/bin/*
+ImageBrowserTest/obj/*
+ImageBrowserTest/bin/*
 .vs/ImageBrowser/*
+.vs/ImageBrowserTest/*
 .idea/*
+ImageBrowser.sln.DotSettings.user
+packages/*

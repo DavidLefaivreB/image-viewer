@@ -5,6 +5,8 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageBrowser", "ImageBrowser\ImageBrowser.csproj", "{189107D3-A43B-48B4-839D-6994F4090B0D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageBrowserTest", "ImageBrowserTest\ImageBrowserTest.csproj", "{A0AE5EDA-B9FF-41D3-B1B2-EBC1E2B4F513}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{189107D3-A43B-48B4-839D-6994F4090B0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{189107D3-A43B-48B4-839D-6994F4090B0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{189107D3-A43B-48B4-839D-6994F4090B0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0AE5EDA-B9FF-41D3-B1B2-EBC1E2B4F513}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0AE5EDA-B9FF-41D3-B1B2-EBC1E2B4F513}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0AE5EDA-B9FF-41D3-B1B2-EBC1E2B4F513}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0AE5EDA-B9FF-41D3-B1B2-EBC1E2B4F513}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

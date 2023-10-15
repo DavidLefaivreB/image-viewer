@@ -8,11 +8,11 @@ namespace ImageBrowser.Model
         public string Name { get; }
         public string ThumbnailPath { get; }
         public string ImagePath { get; }
-        public CategoryType Category { get; }
+        public string Category { get; }
         public string Franchise { get; }
         public string Author { get; }
 
-        public Picture(string name, string thumbnailPath, string imagePath, CategoryType category, string franchise, string author)
+        public Picture(string name, string thumbnailPath, string imagePath, string category, string franchise, string author)
         {
             Name = name;
             ThumbnailPath = thumbnailPath;

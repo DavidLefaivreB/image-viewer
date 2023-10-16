@@ -18,7 +18,9 @@ namespace ImageBrowser.Ui
 
         public void Notify(List<Picture> pictures)
         {
-            pictures.ForEach(AddThumbnail);   
+            thumbnailContainer.Clear();
+            pictures.ForEach(AddThumbnail);
+            thumbnailContainer.Refresh();
         }
 
         private void AddThumbnail(Picture picture)
@@ -26,7 +28,7 @@ namespace ImageBrowser.Ui
             PictureThumbnail pictureThumbnail = new PictureThumbnail();
             pictureThumbnail.Picture = picture;
 
-            thumbnailContainer.addThumbnail(pictureThumbnail);
+            thumbnailContainer.AddThumbnail(pictureThumbnail);
         }
     }
 }

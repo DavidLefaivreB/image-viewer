@@ -6,35 +6,50 @@ namespace ImageBrowser.Ui.Component
 {
     public partial class ThumbnailsContainer
     {
-        private List<PictureThumbnail> thumbnails = new List<PictureThumbnail>();
-        
+        private List<PictureThumbnail> _thumbnails = new List<PictureThumbnail>();
+
+        private double CurrentWindowWidth { get; set; }
+
         public ThumbnailsContainer()
         {
             InitializeComponent();
         }
 
-        public void addThumbnail(PictureThumbnail thumbnail)
+        public void Clear()
         {
-            thumbnails.Add(thumbnail);
+            _thumbnails.Clear();
         }
 
-        private void onControlSizeChanged(object sender, SizeChangedEventArgs e)
+        public void AddThumbnail(PictureThumbnail thumbnail)
         {
-            if (thumbnails.Count > 0)
-                RearrangeThumbnails(GetContainerVisibleWidth(e));
+            _thumbnails.Add(thumbnail);
         }
 
-        private void RearrangeThumbnails(double windowWidth)
+        public void Refresh()
+        {
+            if (CurrentWindowWidth > 0)
+                RearrangeThumbnails();
+        }
+
+        private void OnControlSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            CurrentWindowWidth = GetContainerVisibleWidth(e);
+
+            if (_thumbnails.Count > 0)
+                RearrangeThumbnails();
+        }
+
+        private void RearrangeThumbnails()
         {
             Children.Clear();
-            var nbThumbnailsByRow = (int) (windowWidth / Constants.THUMBNAIL_WIDTH);
-            
-            for (var i = 0; i < thumbnails.Count; i++)
+            var nbThumbnailsByRow = (int)(CurrentWindowWidth / Constants.THUMBNAIL_WIDTH);
+
+            for (var i = 0; i < _thumbnails.Count; i++)
             {
                 DisplayThumbnail(i, nbThumbnailsByRow);
             }
 
-            Height = Math.Ceiling((double)thumbnails.Count / nbThumbnailsByRow) * Constants.THUMBNAIL_HEIGHT;
+            Height = Math.Ceiling((double)_thumbnails.Count / nbThumbnailsByRow) * Constants.THUMBNAIL_HEIGHT;
         }
 
         private void DisplayThumbnail(int thumbnailIndex, int nbThumbnailsByRow)
@@ -42,9 +57,9 @@ namespace ImageBrowser.Ui.Component
             var rowIndex = thumbnailIndex / nbThumbnailsByRow;
             var columnIndex = thumbnailIndex - rowIndex * nbThumbnailsByRow;
 
-            SetLeft(thumbnails[thumbnailIndex], columnIndex * Constants.THUMBNAIL_WIDTH);
-            SetTop(thumbnails[thumbnailIndex], rowIndex * Constants.THUMBNAIL_HEIGHT);
-            Children.Add(thumbnails[thumbnailIndex]);
+            SetLeft(_thumbnails[thumbnailIndex], columnIndex * Constants.THUMBNAIL_WIDTH);
+            SetTop(_thumbnails[thumbnailIndex], rowIndex * Constants.THUMBNAIL_HEIGHT);
+            Children.Add(_thumbnails[thumbnailIndex]);
         }
 
         private static double GetContainerVisibleWidth(SizeChangedEventArgs e)

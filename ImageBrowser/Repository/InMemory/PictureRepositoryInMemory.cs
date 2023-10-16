@@ -39,7 +39,7 @@ namespace ImageBrowser.Repository
             pictures.Add(new Picture("Kim Possible", @"D:\patreon\ayyaSAP\pack57\thumbnail\Kim Possible tanline.jpg", @"D:\patreon\ayyaSAP\pack57\3 NSFW+Lingerie\Kim Possible\Kim Possible tanline.jpg", Tanline.ToString(), "Kim Possible", "AyyaSAP"));
             pictures.Add(new Picture("Kim Possible", @"D:\patreon\ayyaSAP\pack57\thumbnail\Kim Possible topless.jpg", @"D:\patreon\ayyaSAP\pack57\3 NSFW+Lingerie\Kim Possible\Kim Possible topless.jpg", Topless.ToString(), "Kim Possible", "AyyaSAP"));
             pictures.Add(new Picture("Kim Possible", @"D:\patreon\ayyaSAP\pack57\thumbnail\Kim Possible.jpg", @"D:\patreon\ayyaSAP\pack57\2 High-Res illustrations\Kim Possible.jpg", Normal.ToString(), "Kim Possible", "AyyaSAP"));
-            pictures.Add(new Picture("Nova Terra x Samus Aran", @"D:\patreon\ayyaSAP\pack57\thumbnail\Nova Terra x Samus Aran 2 nsfw.jpg", @"D:\patreon\ayyaSAP\pack57\5 YURI\NSFW\Nova Terra x Samus Aran 2 nsfw.jpg", Normal.ToString(), "Metroid", "AyyaSAP"));
+            pictures.Add(new Picture("Nova Terra x Samus Aran", @"D:\patreon\ayyaSAP\pack57\thumbnail\Nova Terra x Samus Aran 2 nsfw.jpg", @"D:\patreon\ayyaSAP\pack57\5 YURI\NSFW\Nova Terra x Samus Aran 2 nsfw.jpg", Nude.ToString(), "Metroid", "AyyaSAP"));
             pictures.Add(new Picture("Nova Terra x Samus Aran", @"D:\patreon\ayyaSAP\pack57\thumbnail\Nova Terra x Samus Aran alt.jpg", @"D:\patreon\ayyaSAP\pack57\5 YURI\Nova Terra x Samus Aran alt.jpg", Alternate.ToString(), "Metroid", "AyyaSAP"));
             pictures.Add(new Picture("Nova Terra x Samus Aran", @"D:\patreon\ayyaSAP\pack57\thumbnail\Nova Terra x Samus Aran bottomless.jpg", @"D:\patreon\ayyaSAP\pack57\5 YURI\NSFW\Nova Terra x Samus Aran bottomless.jpg", Bottomless.ToString(), "Metroid", "AyyaSAP"));
             pictures.Add(new Picture("Nova Terra x Samus Aran", @"D:\patreon\ayyaSAP\pack57\thumbnail\Nova Terra x Samus Aran cum.jpg", @"D:\patreon\ayyaSAP\pack57\5 YURI\Futa+Cum\Nova Terra x Samus Aran cum.jpg", Cum.ToString(), "Metroid", "AyyaSAP"));
@@ -84,5 +84,18 @@ namespace ImageBrowser.Repository
         {
             return pictures;
         }
+        public List<Picture> RetrieveFor(HashSet<string> categories, HashSet<string> franchises)
+        {
+            var list = pictures;
+            
+            if (categories.Count > 0)
+                list = list.FindAll(picture => categories.Contains(picture.Category));
+
+            if (franchises.Count > 0)
+                list = list.FindAll(picture => franchises.Contains(picture.Franchise));
+
+            return list;
+        }
+
     }
 }

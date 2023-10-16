@@ -21,7 +21,7 @@ namespace ImageBrowser
             _thumbnailToDisplayNotifier.AddListener(thumbnailPanel);
             _thumbnailToDisplayNotifier.Notify(_pictureRepository.RetrieveAll());
 
-            ThumbnailsController thumbnailsController = new ThumbnailsController();
+            ThumbnailsController thumbnailsController = new ThumbnailsController(_pictureRepository, _thumbnailToDisplayNotifier);
             rightPanel.SetPictureRepository(thumbnailsController);
         }
         

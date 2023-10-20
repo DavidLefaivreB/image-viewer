@@ -4,6 +4,7 @@
              StartupUri="Ui/MainWindow.xaml">
     <Application.Resources>
         <SolidColorBrush x:Key="PrimaryColor">DeepSkyBlue</SolidColorBrush>
+        <SolidColorBrush x:Key="SecondaryColor">White</SolidColorBrush>
         <SolidColorBrush x:Key="CloseButtonColor">#ED4125</SolidColorBrush>
         <Style x:Key="TitleBarButtonStyle"
                TargetType="Button">
@@ -55,8 +56,22 @@
         </Style>
         <Style x:Key="FontStyle" TargetType="Label">
             <Setter Property="Foreground" Value="White" />
-            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontSize" Value="14" />
             <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+        <Style x:Key="TagFontStyle" TargetType="Label">
+            <Setter Property="Foreground" Value="Black" />
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style>
+
+        <Style x:Key="CloseTagBorder" TargetType="Border">
+            <Setter Property="Background" Value="{StaticResource PrimaryColor}" />
+            <Style.Triggers>
+                <Trigger Property="Border.IsMouseOver" Value="True">
+                    <Setter Property="Border.Background" Value="White" />
+                </Trigger>
+            </Style.Triggers>
         </Style>
 
         <Style TargetType="{x:Type CheckBox}" x:Key="CheckBoxStyle">
@@ -118,15 +133,16 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TextBoxBase}">
-                        <Border x:Name="border" BorderBrush="#8C8C8C" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
-                            <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        <Border x:Name="border" BorderBrush="#8C8C8C" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"
+                                SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource PrimaryColor}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource PrimaryColor}" />
                             </Trigger>
                             <Trigger Property="IsKeyboardFocused" Value="True">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource PrimaryColor}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource PrimaryColor}" />
                                 <Setter Property="BorderThickness" Value="2" />
                             </Trigger>
                         </ControlTemplate.Triggers>

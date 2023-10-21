@@ -1,17 +1,16 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Controls;
 
 namespace ImageBrowser.Ui.Component
 {
-    public partial class AutoCompleteTextBox : TextBox
+    public partial class AutoCompleteTextBox
     {
-        public AutoCompleteTextBox()
+        public List<string> SuggestionValues
         {
-            InitializeComponent();
-            SuggestionValues = new string[]{};
+            private get;
+            set;
         }
-
-        public string[] SuggestionValues { private get; set; }
 
         private string _currentInput = "";
         private string _currentSuggestion = "";
@@ -20,6 +19,13 @@ namespace ImageBrowser.Ui.Component
         private int _selectionStart;
         private int _selectionLength;
 
+        
+        public AutoCompleteTextBox()
+        {
+            InitializeComponent();
+            SuggestionValues = new List<string>(10);
+        }
+        
         private void AutoCompleteTextBox_OnTextChanged(object sender, TextChangedEventArgs e)
         {
             {

@@ -12,6 +12,7 @@ namespace ImageBrowser
     {
         private PictureRepository _pictureRepository = new PictureRepositoryInMemory();
         private ThumbnailToDisplayNotifier _thumbnailToDisplayNotifier = new ThumbnailToDisplayNotifier();
+        private FranchiseRepository _franchiseRepository = new FranchiseRepositoryInMemory();
 
         public MainWindow()
         {
@@ -23,6 +24,7 @@ namespace ImageBrowser
 
             ThumbnailsController thumbnailsController = new ThumbnailsController(_pictureRepository, _thumbnailToDisplayNotifier);
             rightPanel.SetPictureRepository(thumbnailsController);
+            rightPanel.UpdateAvailableFranchises(_franchiseRepository.RetrieveAll());
         }
         
         private void OnMinimizeButtonClick(object sender, RoutedEventArgs e)

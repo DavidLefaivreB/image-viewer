@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -56,6 +57,11 @@ namespace ImageBrowser.Ui
         {
             TagsContainer.Children.Remove(tag);
             _thumbnailsController.RemoveFranchise((string)tag.Title.Content);
+        }
+
+        public void UpdateAvailableFranchises(List<string> retrieveAll)
+        {
+            FranchiseTextBox.SuggestionValues = retrieveAll;
         }
     }
 }

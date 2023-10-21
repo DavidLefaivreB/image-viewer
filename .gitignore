@@ -8,3 +8,5 @@ ImageBrowserTest/bin/*
 .idea/*
 ImageBrowser.sln.DotSettings.user
 packages/*
+
+.vs/ProjectEvaluation/

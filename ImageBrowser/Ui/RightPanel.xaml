@@ -123,13 +123,13 @@
             Grid.Row="4"
             Content="Franchise"
             Style="{StaticResource FontStyle}" />
-        <TextBox
+        <component:AutoCompleteTextBox
             x:Name="FranchiseTextBox"
             Grid.Column="1"
             Grid.Row="5"
             Margin="5, 0, 20, 0"
             Style="{StaticResource TextBoxStyle}"
-            KeyDown="OnFranchiseKeyDownHandler" />
+            KeyDown="OnFranchiseKeyDownHandler" /> 
         <WrapPanel Grid.Column="1" Grid.Row="7" x:Name="TagsContainer" />
     </Grid>
 </UserControl>

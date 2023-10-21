@@ -69,6 +69,9 @@
     <Compile Include="Repository\InMemory\CategoryType.cs" />
     <Compile Include="Repository\InMemory\PictureRepositoryInMemory.cs" />
     <Compile Include="Repository\PictureRepository.cs" />
+    <Compile Include="Ui\Component\AutoCompleteTextBox.xaml.cs">
+      <DependentUpon>AutoCompleteTextBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Ui\Component\Tag.xaml.cs">
       <DependentUpon>Tag.xaml</DependentUpon>
     </Compile>
@@ -85,6 +88,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Ui\Component\AutoCompleteTextBox.xaml" />
     <Page Include="Ui\Component\PictureThumbnail.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

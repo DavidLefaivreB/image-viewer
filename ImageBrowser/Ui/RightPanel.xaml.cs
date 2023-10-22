@@ -15,7 +15,7 @@ namespace ImageBrowser.Ui
         public RightPanel()
         {
             InitializeComponent();
-            
+
             CategoryGrid.RowDefinitions.Clear();
 
             for (var i = 0; i < 5; ++i)
@@ -23,96 +23,29 @@ namespace ImageBrowser.Ui
                 CategoryGrid.RowDefinitions.Add(new RowDefinition());
             }
 
-            CheckBox checkBoxNormal = new CheckBox();
-            checkBoxNormal.Checked += OnCheckBoxChecked;
-            checkBoxNormal.Unchecked += OnCheckBoxUnchecked;
-            checkBoxNormal.Content = "Normal";
-            checkBoxNormal.Style = (Style)FindResource("CheckBoxStyle");
-            
-            CheckBox checkBoxLingerie = new CheckBox();
-            checkBoxLingerie.Checked += OnCheckBoxChecked;
-            checkBoxLingerie.Unchecked += OnCheckBoxUnchecked;
-            checkBoxLingerie.Content = "Lingerie";
-            checkBoxLingerie.Style = (Style)FindResource("CheckBoxStyle");
-            
-            CheckBox checkBoxBottomless = new CheckBox();
-            checkBoxBottomless.Checked += OnCheckBoxChecked;
-            checkBoxBottomless.Unchecked += OnCheckBoxUnchecked;
-            checkBoxBottomless.Content = "Bottomless";
-            checkBoxBottomless.Style = (Style)FindResource("CheckBoxStyle");
-            
-            CheckBox checkBoxTopless = new CheckBox();
-            checkBoxTopless.Checked += OnCheckBoxChecked;
-            checkBoxTopless.Unchecked += OnCheckBoxUnchecked;
-            checkBoxTopless.Content = "Topless";
-            checkBoxTopless.Style = (Style)FindResource("CheckBoxStyle");
-            
-            CheckBox checkBoxNude = new CheckBox();
-            checkBoxNude.Checked += OnCheckBoxChecked;
-            checkBoxNude.Unchecked += OnCheckBoxUnchecked;
-            checkBoxNude.Content = "Nude";
-            checkBoxNude.Style = (Style)FindResource("CheckBoxStyle");
-            
-            CheckBox checkBoxPubes = new CheckBox();
-            checkBoxPubes.Checked += OnCheckBoxChecked;
-            checkBoxPubes.Unchecked += OnCheckBoxUnchecked;
-            checkBoxPubes.Content = "Pubes";
-            checkBoxPubes.Style = (Style)FindResource("CheckBoxStyle");
-            
-            CheckBox checkBoxTanline = new CheckBox();
-            checkBoxTanline.Checked += OnCheckBoxChecked;
-            checkBoxTanline.Unchecked += OnCheckBoxUnchecked;
-            checkBoxTanline.Content = "Tanline";
-            checkBoxTanline.Style = (Style)FindResource("CheckBoxStyle");
-            
-            CheckBox checkBoxCum = new CheckBox();
-            checkBoxCum.Checked += OnCheckBoxChecked;
-            checkBoxCum.Unchecked += OnCheckBoxUnchecked;
-            checkBoxCum.Content = "Cum";
-            checkBoxCum.Style = (Style)FindResource("CheckBoxStyle");
-            
-            CheckBox checkBoxAlternate = new CheckBox();
-            checkBoxAlternate.Checked += OnCheckBoxChecked;
-            checkBoxAlternate.Unchecked += OnCheckBoxUnchecked;
-            checkBoxAlternate.Content = "Alternate";
-            checkBoxAlternate.Style = (Style)FindResource("CheckBoxStyle");
-            
-            Grid.SetColumn(checkBoxNormal, 1);
-            Grid.SetRow(checkBoxNormal, 0);
-            
-            Grid.SetColumn(checkBoxLingerie, 2);
-            Grid.SetRow(checkBoxLingerie, 0);
-            
-            Grid.SetColumn(checkBoxBottomless, 1);
-            Grid.SetRow(checkBoxBottomless, 1);
+            AddCategoryCheckbox("Normal", 1, 0);
+            AddCategoryCheckbox("Lingerie", 2, 0);
+            AddCategoryCheckbox("Bottomless", 1, 1);
+            AddCategoryCheckbox("Topless", 2, 1);
+            AddCategoryCheckbox("Nude", 1, 2);
+            AddCategoryCheckbox("Pubes", 2, 2);
+            AddCategoryCheckbox("Tanline", 1, 3);
+            AddCategoryCheckbox("Cum", 2, 3);
+            AddCategoryCheckbox("Alternate", 1, 4);
+        }
 
-            Grid.SetColumn(checkBoxTopless, 2);
-            Grid.SetRow(checkBoxTopless, 1);
-            
-            Grid.SetColumn(checkBoxNude, 1);
-            Grid.SetRow(checkBoxNude, 2);
-                
-            Grid.SetColumn(checkBoxPubes, 2);
-            Grid.SetRow(checkBoxPubes, 2);
-                
-            Grid.SetColumn(checkBoxTanline, 1);
-            Grid.SetRow(checkBoxTanline, 3);
-                
-            Grid.SetColumn(checkBoxCum, 2);
-            Grid.SetRow(checkBoxCum, 3);
-                
-            Grid.SetColumn(checkBoxAlternate, 1);
-            Grid.SetRow(checkBoxAlternate, 4);
-            
-            CategoryGrid.Children.Add(checkBoxNormal);
-            CategoryGrid.Children.Add(checkBoxLingerie);
-            CategoryGrid.Children.Add(checkBoxBottomless);
-            CategoryGrid.Children.Add(checkBoxTopless);
-            CategoryGrid.Children.Add(checkBoxNude);
-            CategoryGrid.Children.Add(checkBoxPubes);
-            CategoryGrid.Children.Add(checkBoxTanline);
-            CategoryGrid.Children.Add(checkBoxCum);
-            CategoryGrid.Children.Add(checkBoxAlternate);
+        private void AddCategoryCheckbox(String content, int column, int row)
+        {
+            CheckBox categoryCheckBox = new CheckBox();
+            categoryCheckBox.Checked += OnCheckBoxChecked;
+            categoryCheckBox.Unchecked += OnCheckBoxUnchecked;
+            categoryCheckBox.Content = content;
+            categoryCheckBox.Style = (Style)FindResource("CheckBoxStyle");
+
+            Grid.SetColumn(categoryCheckBox, column);
+            Grid.SetRow(categoryCheckBox, row);
+
+            CategoryGrid.Children.Add(categoryCheckBox);
         }
 
         public void SetPictureRepository(ThumbnailsController thumbnailsController)

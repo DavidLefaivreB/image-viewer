@@ -5,13 +5,13 @@ namespace ImageBrowser.Repository.Sql;
 
 public class SqlFranchiseRepository : FranchiseRepository
 {
-    private static readonly string path = @"D:\workspace\ImageBrowser\info.sqlite";
+    private static readonly string Path = @"D:\workspace\ImageBrowser\info.sqlite";
 
-    private SqliteConnection _connection;
+    private readonly SqliteConnection _connection;
 
     public SqlFranchiseRepository()
     {
-        _connection = new SqliteConnection($"Data Source={path}");
+        _connection = new SqliteConnection($"Data Source={Path}");
         _connection.Open();
     }
 

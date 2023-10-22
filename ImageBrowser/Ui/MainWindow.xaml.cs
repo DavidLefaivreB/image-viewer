@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using ImageBrowser.Controller;
 using ImageBrowser.Notifier;
@@ -28,6 +29,7 @@ namespace ImageBrowser
             ThumbnailsController thumbnailsController = new ThumbnailsController(_pictureRepository, _thumbnailToDisplayNotifier);
             rightPanel.SetPictureRepository(thumbnailsController);
             rightPanel.UpdateAvailableFranchises(_franchiseRepository.RetrieveAll());
+            rightPanel.UpdateAvailableCategories(new List<string>(){"Normal", "Lingerie", "Bottomless", "Topless", "Nude", "Pubes", "Tanline", "Cum", "Futacum", "Futa", "Alternate"});
         }
         
         private void OnMinimizeButtonClick(object sender, RoutedEventArgs e)

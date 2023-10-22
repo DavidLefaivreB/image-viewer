@@ -15,37 +15,6 @@ namespace ImageBrowser.Ui
         public RightPanel()
         {
             InitializeComponent();
-
-            CategoryGrid.RowDefinitions.Clear();
-
-            for (var i = 0; i < 5; ++i)
-            {
-                CategoryGrid.RowDefinitions.Add(new RowDefinition());
-            }
-
-            AddCategoryCheckbox("Normal", 1, 0);
-            AddCategoryCheckbox("Lingerie", 2, 0);
-            AddCategoryCheckbox("Bottomless", 1, 1);
-            AddCategoryCheckbox("Topless", 2, 1);
-            AddCategoryCheckbox("Nude", 1, 2);
-            AddCategoryCheckbox("Pubes", 2, 2);
-            AddCategoryCheckbox("Tanline", 1, 3);
-            AddCategoryCheckbox("Cum", 2, 3);
-            AddCategoryCheckbox("Alternate", 1, 4);
-        }
-
-        private void AddCategoryCheckbox(String content, int column, int row)
-        {
-            CheckBox categoryCheckBox = new CheckBox();
-            categoryCheckBox.Checked += OnCheckBoxChecked;
-            categoryCheckBox.Unchecked += OnCheckBoxUnchecked;
-            categoryCheckBox.Content = content;
-            categoryCheckBox.Style = (Style)FindResource("CheckBoxStyle");
-
-            Grid.SetColumn(categoryCheckBox, column);
-            Grid.SetRow(categoryCheckBox, row);
-
-            CategoryGrid.Children.Add(categoryCheckBox);
         }
 
         public void SetPictureRepository(ThumbnailsController thumbnailsController)
@@ -90,9 +59,42 @@ namespace ImageBrowser.Ui
             _thumbnailsController.RemoveFranchise((string)tag.Title.Content);
         }
 
-        public void UpdateAvailableFranchises(List<string> retrieveAll)
+        public void UpdateAvailableFranchises(List<string> franchises)
         {
-            FranchiseTextBox.SuggestionValues = retrieveAll;
+            FranchiseTextBox.SuggestionValues = franchises;
+        }
+
+        public void UpdateAvailableCategories(List<string> categories)
+        {
+            CategoryGrid.RowDefinitions.Clear();
+
+            var nbRows = Math.Ceiling(categories.Count / 2.0);
+            for (var i = 0; i < nbRows; ++i)
+            {
+                CategoryGrid.RowDefinitions.Add(new RowDefinition());
+            }
+
+            for (var i = 0; i < categories.Count; ++i)
+            {
+                var column = (i % 2 == 0) ? 1 : 2;
+                var row = (int)Math.Floor(i / 2.0);
+                
+                AddCategoryCheckbox(categories[i], column, row);
+            }
+        }
+        
+        private void AddCategoryCheckbox(String content, int column, int row)
+        {
+            CheckBox categoryCheckBox = new CheckBox();
+            categoryCheckBox.Checked += OnCheckBoxChecked;
+            categoryCheckBox.Unchecked += OnCheckBoxUnchecked;
+            categoryCheckBox.Content = content;
+            categoryCheckBox.Style = (Style)FindResource("CheckBoxStyle");
+
+            Grid.SetColumn(categoryCheckBox, column);
+            Grid.SetRow(categoryCheckBox, row);
+
+            CategoryGrid.Children.Add(categoryCheckBox);
         }
     }
 }

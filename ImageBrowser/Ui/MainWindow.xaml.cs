@@ -17,6 +17,7 @@ namespace ImageBrowser
         private PictureRepository _pictureRepository = new PictureRepositoryInMemory();
         private ThumbnailToDisplayNotifier _thumbnailToDisplayNotifier = new ThumbnailToDisplayNotifier();
         private FranchiseRepository _franchiseRepository = new SqlFranchiseRepository();
+        private CategoryRepository _categoryRepository = new CategoryRepositoryInMemory();
 
         public MainWindow()
         {
@@ -29,7 +30,7 @@ namespace ImageBrowser
             ThumbnailsController thumbnailsController = new ThumbnailsController(_pictureRepository, _thumbnailToDisplayNotifier);
             rightPanel.SetPictureRepository(thumbnailsController);
             rightPanel.UpdateAvailableFranchises(_franchiseRepository.RetrieveAll());
-            rightPanel.UpdateAvailableCategories(new List<string>(){"Normal", "Lingerie", "Bottomless", "Topless", "Nude", "Pubes", "Tanline", "Cum", "Futacum", "Futa", "Alternate"});
+            rightPanel.UpdateAvailableCategories(_categoryRepository.RetrieveAll());
         }
         
         private void OnMinimizeButtonClick(object sender, RoutedEventArgs e)

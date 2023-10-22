@@ -3,11 +3,11 @@ using static ImageBrowser.Repository.CategoryType;
 
 namespace ImageBrowser.Repository
 {
-    public class CategoryRepositoryInMemory
+    public class CategoryRepositoryInMemory : CategoryRepository
     {
-        public List<CategoryType> retrieveAll()
+        public List<string> RetrieveAll()
         {
-            return new List<CategoryType>(){Normal, Alternate, Lingerie, Topless, Bottomless, Nude, Pubes, Tanline, Cum, Futacum, Futa};
+            return new List<string>(){Normal.ToString(), Alternate.ToString(), Lingerie.ToString(), Topless.ToString(), Bottomless.ToString(), Nude.ToString(), Pubes.ToString(), Tanline.ToString(), Cum.ToString(), Futacum.ToString(), Futa.ToString()};
         }
     }
 }

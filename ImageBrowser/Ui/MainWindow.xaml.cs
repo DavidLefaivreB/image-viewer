@@ -1,7 +1,10 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using ImageBrowser.Controller;
 using ImageBrowser.Notifier;
 using ImageBrowser.Repository;
+using ImageBrowser.Repository.Sql;
+using Microsoft.Data.Sqlite;
 
 namespace ImageBrowser
 {
@@ -12,7 +15,7 @@ namespace ImageBrowser
     {
         private PictureRepository _pictureRepository = new PictureRepositoryInMemory();
         private ThumbnailToDisplayNotifier _thumbnailToDisplayNotifier = new ThumbnailToDisplayNotifier();
-        private FranchiseRepository _franchiseRepository = new FranchiseRepositoryInMemory();
+        private FranchiseRepository _franchiseRepository = new SqlFranchiseRepository();
 
         public MainWindow()
         {

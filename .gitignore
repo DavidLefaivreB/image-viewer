@@ -10,3 +10,5 @@ ImageBrowser.sln.DotSettings.user
 packages/*
 
 .vs/ProjectEvaluation/
+
+info.sqlite

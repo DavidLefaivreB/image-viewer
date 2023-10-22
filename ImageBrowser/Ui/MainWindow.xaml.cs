@@ -17,7 +17,7 @@ namespace ImageBrowser
         private PictureRepository _pictureRepository = new PictureRepositoryInMemory();
         private ThumbnailToDisplayNotifier _thumbnailToDisplayNotifier = new ThumbnailToDisplayNotifier();
         private FranchiseRepository _franchiseRepository = new SqlFranchiseRepository();
-        private CategoryRepository _categoryRepository = new CategoryRepositoryInMemory();
+        private CategoryRepository _categoryRepository = new SqlCategoryRepository();
 
         public MainWindow()
         {

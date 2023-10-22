@@ -14,8 +14,8 @@ namespace ImageBrowser
     /// </summary>
     public partial class MainWindow : Window
     {
-        private PictureRepository _pictureRepository = new PictureRepositoryInMemory();
-        private ThumbnailToDisplayNotifier _thumbnailToDisplayNotifier = new ThumbnailToDisplayNotifier();
+        private PictureRepository _pictureRepository = new SqlPictureRepository();
+        private ThumbnailToDisplayNotifier _thumbnailToDisplayNotifier = new();
         private FranchiseRepository _franchiseRepository = new SqlFranchiseRepository();
         private CategoryRepository _categoryRepository = new SqlCategoryRepository();
 

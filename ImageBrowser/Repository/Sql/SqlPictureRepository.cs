@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 using ImageBrowser.Model;
 using Microsoft.Data.Sqlite;
 
@@ -7,6 +8,7 @@ namespace ImageBrowser.Repository.Sql;
 public class SqlPictureRepository : PictureRepository
 {
     private static readonly string Path = @"D:\workspace\ImageBrowser\info.sqlite";
+    private static readonly HashSet<string> EmptyCollection = new();
 
     private readonly SqliteConnection _connection;
 
@@ -18,7 +20,17 @@ public class SqlPictureRepository : PictureRepository
 
     public List<Picture> RetrieveAll()
     {
-        var sql = "SELECT * FROM PICTURES_V";
+        return RetrieveFor(EmptyCollection, EmptyCollection);
+    }
+
+    public List<Picture> RetrieveFor(HashSet<string> categoriesFilter, HashSet<string> franchisesFilter)
+    {
+        var whereQuery = new StringBuilder();
+
+        whereQuery.Append(CreateWhereFilter(categoriesFilter, "category", true));
+        whereQuery.Append(CreateWhereFilter(franchisesFilter, "franchise", whereQuery.Length == 0));
+
+        var sql = "SELECT * FROM PICTURE_V " + whereQuery;
         var command = new SqliteCommand(sql, _connection);
         var reader = command.ExecuteReader();
 
@@ -33,8 +45,23 @@ public class SqlPictureRepository : PictureRepository
         return pictures;
     }
 
-    public List<Picture> RetrieveFor(HashSet<string> categoriesFilter, HashSet<string> franchisesFilter)
+    private static StringBuilder CreateWhereFilter(HashSet<string> filters, string columnName, bool isFirst)
     {
-        return new List<Picture>();
+        var filterClause = new StringBuilder();
+        if (filters.Count > 0)
+        {
+            filterClause.Append(isFirst ? "WHERE " : "AND ");
+            filterClause.Append($"{columnName} in ('");
+            
+            foreach (var category in filters)
+            {
+                filterClause.Append(category).Append("', '");
+            }
+
+            filterClause.Length -= 3;
+            filterClause.Append(")");
+        }
+
+        return filterClause;
     }
 }

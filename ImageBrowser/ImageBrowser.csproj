@@ -14,6 +14,8 @@
     <Resource Include="Assets\maximize.png" />
     <Resource Include="Assets\minimize.png" />
     <Resource Include="Assets\reduce.png" />
+    <None Remove="Assets\add.png" />
+    <Resource Include="Assets\add.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Assets\appIcon.png" />

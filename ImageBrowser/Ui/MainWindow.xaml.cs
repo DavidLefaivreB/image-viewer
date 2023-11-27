@@ -50,5 +50,10 @@ namespace ImageBrowser
         {
             Close();
         }
+
+        private void AddPicture(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

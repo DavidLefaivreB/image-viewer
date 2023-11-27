@@ -34,8 +34,17 @@
             <Rectangle Grid.Column="1" Fill="Black" />
             <u:RightPanel x:Name="rightPanel" Grid.Column="2" />
 
-            <u:CentralPanel x:Name="thumbnailPanel" Grid.Column="0" />
-
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <u:CentralPanel x:Name="thumbnailPanel" Grid.Row="0" />
+                <Button Grid.Row="1" HorizontalAlignment="Right" Height="64" Click="AddPicture">
+                    <Image Source="/Assets/add.png" />
+                </Button>
+            </Grid>
+            
             <GridSplitter Grid.Column="1"
                           HorizontalAlignment="Stretch"
                           VerticalAlignment="Stretch"

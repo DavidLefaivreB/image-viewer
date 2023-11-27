@@ -12,3 +12,5 @@ packages/*
 .vs/ProjectEvaluation/
 
 info.sqlite
+
+ImageBrowser.sln

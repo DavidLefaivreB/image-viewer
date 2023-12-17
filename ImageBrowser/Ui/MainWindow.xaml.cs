@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Controls.Primitives;
 using ImageBrowser.Controller;
 using ImageBrowser.Notifier;
 using ImageBrowser.Repository;
 using ImageBrowser.Repository.Sql;
+using ImageBrowser.Ui.AddWindow;
 using Microsoft.Data.Sqlite;
 
 namespace ImageBrowser
@@ -33,27 +35,9 @@ namespace ImageBrowser
             rightPanel.UpdateAvailableCategories(_categoryRepository.RetrieveAll());
         }
         
-        private void OnMinimizeButtonClick(object sender, RoutedEventArgs e)
-        {
-            WindowState = WindowState.Minimized;
-        }
-
-        private void OnMaximizeRestoreButtonClick(object sender, RoutedEventArgs e)
-        {
-            if (WindowState == WindowState.Maximized)
-                WindowState = WindowState.Normal;
-            else
-                WindowState = WindowState.Maximized;
-        }
-
-        private void OnCloseButtonClick(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
         private void AddPicture(object sender, RoutedEventArgs e)
         {
-            
+            new AddPictureDialog().ShowDialog();
         }
     }
 }

@@ -4,7 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:uc="clr-namespace:ImageBrowser.Ui.Component"
-        xmlns:u="clr-namespace:ImageBrowser.Ui"
+        xmlns:local="clr-namespace:ImageBrowser.ViewModel"
+        xmlns:gallery="clr-namespace:ImageBrowser.Ui.View.Gallery"
+        xmlns:album="clr-namespace:ImageBrowser.Ui.View.Album"
         mc:Ignorable="d"
         WindowStyle="None"
         Height="1000"
@@ -19,38 +21,21 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Rectangle Fill="Black" />
-        <uc:TitleBar Title="Image Viewer"
+        <uc:TitleBar Grid.Row="0" Title="Image Viewer"
                      Icon="/Assets/appIcon.png"
                      Height="32"
                      VerticalAlignment="Top" />
-        <Rectangle Grid.Row="1"
+        <Rectangle Grid.Row="1" 
                    Fill="#242424" />
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="10000*" MinWidth="500" />
-                <ColumnDefinition Width="4" />
-                <ColumnDefinition Width="*" MinWidth="300" />
-            </Grid.ColumnDefinitions>
-            <Rectangle Grid.Column="1" Fill="Black" />
-            <u:RightPanel x:Name="rightPanel" Grid.Column="2" />
-
-            <Grid Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <u:CentralPanel x:Name="thumbnailPanel" Grid.Row="0" />
-                <Button Grid.Row="1" HorizontalAlignment="Right" Height="64" Click="AddPicture">
-                    <Image Source="/Assets/add.png" />
-                </Button>
-            </Grid>
-            
-            <GridSplitter Grid.Column="1"
-                          HorizontalAlignment="Stretch"
-                          VerticalAlignment="Stretch"
-                          Background="Black" />
-
-            <ContentControl Grid.Column="2" MinWidth="200" />
-        </Grid>
+        <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}">
+            <ContentControl.Resources>
+                <DataTemplate DataType="{x:Type local:GalleryViewModel}">
+                    <gallery:GalleryView />
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type local:EditAlbumViewModel}">
+                    <album:EditAlbumView />
+                </DataTemplate>
+            </ContentControl.Resources>
+        </ContentControl>
     </Grid>
 </Window>

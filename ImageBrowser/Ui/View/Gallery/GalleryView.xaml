@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="ImageBrowser.Ui.View.Gallery.GalleryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ui="clr-namespace:ImageBrowser.Ui"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Rectangle Fill="Black" />
+        <Rectangle Grid.Row="1"
+                   Fill="#242424" />
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100*" MinWidth="500" />
+                <ColumnDefinition Width="4" />
+                <ColumnDefinition Width="*" MinWidth="300" />
+            </Grid.ColumnDefinitions>
+            <Rectangle Grid.Column="1" Fill="Black" />
+            <ui:RightPanel x:Name="rightPanel" Grid.Column="2" />
+
+            <ui:CentralPanel Grid.Column="0" x:Name="thumbnailPanel" />
+
+            <GridSplitter Grid.Column="1"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch"
+                          Background="Black" />
+
+            <ContentControl Grid.Column="2" MinWidth="200" />
+        </Grid>
+    </Grid>
+</UserControl>

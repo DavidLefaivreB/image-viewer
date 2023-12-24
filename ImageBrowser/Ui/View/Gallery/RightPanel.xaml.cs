@@ -6,7 +6,7 @@ using System.Windows.Input;
 using ImageBrowser.Controller;
 using ImageBrowser.Ui.Component;
 
-namespace ImageBrowser.Ui
+namespace ImageBrowser.Ui.View.Gallery
 {
     public partial class RightPanel
     {
@@ -22,12 +22,12 @@ namespace ImageBrowser.Ui
             _thumbnailsController = thumbnailsController;
         }
 
-        private void OnCheckBoxChecked(object sender, RoutedEventArgs e)
+        private void OnCheckBoxChecked(object sender)
         {
             _thumbnailsController.AddCategory(((CheckBox)sender).Content.ToString());
         }
 
-        private void OnCheckBoxUnchecked(object sender, RoutedEventArgs e)
+        private void OnCheckBoxUnchecked(object sender)
         {
             _thumbnailsController.RemoveCategory(((CheckBox)sender).Content.ToString());
         }
@@ -62,39 +62,6 @@ namespace ImageBrowser.Ui
         public void UpdateAvailableFranchises(List<string> franchises)
         {
             FranchiseTextBox.SuggestionValues = franchises;
-        }
-
-        public void UpdateAvailableCategories(List<string> categories)
-        {
-            CategoryGrid.RowDefinitions.Clear();
-
-            var nbRows = Math.Ceiling(categories.Count / 2.0);
-            for (var i = 0; i < nbRows; ++i)
-            {
-                CategoryGrid.RowDefinitions.Add(new RowDefinition());
-            }
-
-            for (var i = 0; i < categories.Count; ++i)
-            {
-                var column = (i % 2 == 0) ? 1 : 2;
-                var row = (int)Math.Floor(i / 2.0);
-                
-                AddCategoryCheckbox(categories[i], column, row);
-            }
-        }
-        
-        private void AddCategoryCheckbox(String content, int column, int row)
-        {
-            CheckBox categoryCheckBox = new CheckBox();
-            categoryCheckBox.Checked += OnCheckBoxChecked;
-            categoryCheckBox.Unchecked += OnCheckBoxUnchecked;
-            categoryCheckBox.Content = content;
-            categoryCheckBox.Style = (Style)FindResource("CheckBoxStyle");
-
-            Grid.SetColumn(categoryCheckBox, column);
-            Grid.SetRow(categoryCheckBox, row);
-
-            CategoryGrid.Children.Add(categoryCheckBox);
         }
     }
 }

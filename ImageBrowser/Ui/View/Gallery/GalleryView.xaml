@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:ui="clr-namespace:ImageBrowser.Ui"
+             xmlns:gallery="clr-namespace:ImageBrowser.Ui.View.Gallery"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
@@ -21,7 +22,7 @@
                 <ColumnDefinition Width="*" MinWidth="300" />
             </Grid.ColumnDefinitions>
             <Rectangle Grid.Column="1" Fill="Black" />
-            <ui:RightPanel x:Name="rightPanel" Grid.Column="2" />
+            <gallery:RightPanel x:Name="RightPanel" Grid.Column="2" />
 
             <ui:CentralPanel Grid.Column="0" x:Name="thumbnailPanel" />
 

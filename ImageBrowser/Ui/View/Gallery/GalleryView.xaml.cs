@@ -24,9 +24,9 @@ public partial class GalleryView : UserControl
         _thumbnailToDisplayNotifier.Notify(_pictureRepository.RetrieveAll());
 
         ThumbnailsController thumbnailsController = new ThumbnailsController(_pictureRepository, _thumbnailToDisplayNotifier);
-        rightPanel.SetPictureRepository(thumbnailsController);
-        rightPanel.UpdateAvailableFranchises(_franchiseRepository.RetrieveAll());
-        rightPanel.UpdateAvailableCategories(_categoryRepository.RetrieveAll());
+        RightPanel.SetPictureRepository(thumbnailsController);
+        RightPanel.UpdateAvailableFranchises(_franchiseRepository.RetrieveAll());
+        RightPanel.CategoryPanel.UpdateAvailableCategories(_categoryRepository.RetrieveAll());
     }
         
     private void AddPicture(object sender, RoutedEventArgs e)

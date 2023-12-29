@@ -9,7 +9,7 @@ public class SqlFranchiseRepository : FranchiseRepository
 
     private readonly SqliteConnection _connection;
 
-    public SqlFranchiseRepository()
+    internal SqlFranchiseRepository()
     {
         _connection = new SqliteConnection($"Data Source={Path}");
         _connection.Open();

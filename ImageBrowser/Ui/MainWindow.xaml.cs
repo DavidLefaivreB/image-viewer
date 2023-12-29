@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using ImageBrowser.Repository;
+using ImageBrowser.Repository.Sql;
 using ImageBrowser.Store;
 using ImageBrowser.ViewModel;
 
@@ -17,6 +19,7 @@ namespace ImageBrowser
             navigationStore.CurrentViewModel = new EditAlbumViewModel(navigationStore);
             
             DataContext = new MainViewModel(navigationStore);
+            RepositoryProvider.Instance.SetRepositoryFactory(new SqlRepositoryFactory());
         }
     }
 }

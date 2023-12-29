@@ -3,23 +3,20 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using ImageBrowser.Repository;
-using ImageBrowser.Repository.InMemory;
 
 namespace ImageBrowser.Ui.Component;
 
 public partial class CategoryPanel
 {
-    private CategoryRepository _categoryRepository;
-    
     public CategoryPanel()
     {
         InitializeComponent();
 
-        _categoryRepository = new CategoryRepositoryInMemory();
-        UpdateAvailableCategories(_categoryRepository.RetrieveAll());
+        var categoryRepository = RepositoryProvider.Instance.getCategoryRepository();
+        UpdateAvailableCategories(categoryRepository.RetrieveAll());
     }
-    
-    public void UpdateAvailableCategories(List<string> categories)
+
+    private void UpdateAvailableCategories(List<string> categories)
     {
         CategoryGrid.RowDefinitions.Clear();
 

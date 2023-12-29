@@ -12,7 +12,7 @@ public class SqlPictureRepository : PictureRepository
 
     private readonly SqliteConnection _connection;
 
-    public SqlPictureRepository()
+    internal SqlPictureRepository()
     {
         _connection = new SqliteConnection($"Data Source={Path}");
         _connection.Open();

@@ -9,7 +9,7 @@ public class SqlCategoryRepository : CategoryRepository
 
     private readonly SqliteConnection _connection;
     
-    public SqlCategoryRepository()
+    internal SqlCategoryRepository()
     {
         _connection = new SqliteConnection($"Data Source={Path}");
         _connection.Open();

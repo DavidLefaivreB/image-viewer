@@ -2,24 +2,23 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using ImageBrowser.Repository;
+using ImageBrowser.Repository.InMemory;
 
 namespace ImageBrowser.Ui.Component;
 
 public partial class CategoryPanel
 {
-    public static DependencyProperty CategoriesProperty = DependencyProperty.Register("Categories", typeof(List<string>), typeof(CategoryPanel), new PropertyMetadata(new List<string>(), OnSetTextChanged));
-
+    private CategoryRepository _categoryRepository;
+    
     public CategoryPanel()
     {
         InitializeComponent();
-    }
 
-    private static void OnSetTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
-    {
-        var categoryPanel = d as CategoryPanel;
-        categoryPanel?.UpdateAvailableCategories(e.NewValue as List<string>);
+        _categoryRepository = new CategoryRepositoryInMemory();
+        UpdateAvailableCategories(_categoryRepository.RetrieveAll());
     }
-
+    
     public void UpdateAvailableCategories(List<string> categories)
     {
         CategoryGrid.RowDefinitions.Clear();
@@ -67,10 +66,4 @@ public partial class CategoryPanel
 
     public event CheckBoxSelection CategoryChecked;
     public event CheckBoxSelection CategoryUnchecked;
-    
-    public List<string> Categories
-    {
-        get { return (List<string>)base.GetValue(CategoriesProperty); }
-        set { base.SetValue(CategoriesProperty, value); }
-    }
 }

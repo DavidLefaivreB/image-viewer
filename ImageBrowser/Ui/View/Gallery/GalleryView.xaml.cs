@@ -13,7 +13,6 @@ public partial class GalleryView : UserControl
     private PictureRepository _pictureRepository = new SqlPictureRepository();
     private ThumbnailToDisplayNotifier _thumbnailToDisplayNotifier = new();
     private FranchiseRepository _franchiseRepository = new SqlFranchiseRepository();
-    private CategoryRepository _categoryRepository = new SqlCategoryRepository();
 
     public GalleryView()
     {
@@ -26,7 +25,6 @@ public partial class GalleryView : UserControl
         ThumbnailsController thumbnailsController = new ThumbnailsController(_pictureRepository, _thumbnailToDisplayNotifier);
         RightPanel.SetPictureRepository(thumbnailsController);
         RightPanel.UpdateAvailableFranchises(_franchiseRepository.RetrieveAll());
-        RightPanel.CategoryPanel.UpdateAvailableCategories(_categoryRepository.RetrieveAll());
     }
         
     private void AddPicture(object sender, RoutedEventArgs e)

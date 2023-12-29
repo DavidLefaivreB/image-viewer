@@ -4,7 +4,7 @@ using ImageBrowser.Repository.Sql;
 using ImageBrowser.Store;
 using ImageBrowser.ViewModel;
 
-namespace ImageBrowser
+namespace ImageBrowser.UI
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

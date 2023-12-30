@@ -25,7 +25,7 @@
                      Icon="/Assets/appIcon.png"
                      Height="32"
                      VerticalAlignment="Top" />
-        <Rectangle Grid.Row="1" 
+        <Rectangle Grid.Row="1"
                    Fill="#242424" />
         <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}">
             <ContentControl.Resources>
@@ -33,7 +33,7 @@
                     <gallery:GalleryView />
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type local:EditAlbumViewModel}">
-                    <album:EditAlbumView />
+                    <album:EditAlbumView Source="{Binding Pictures}" />
                 </DataTemplate>
             </ContentControl.Resources>
         </ContentControl>

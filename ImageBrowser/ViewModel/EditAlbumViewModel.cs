@@ -1,15 +1,30 @@
+using System.Collections.Generic;
 using System.Windows.Input;
 using ImageBrowser.Commands;
+using ImageBrowser.Model;
 using ImageBrowser.Store;
 
 namespace ImageBrowser.ViewModel;
 
 public class EditAlbumViewModel : ViewModelBase
 {
-    public ICommand NavigateAccountCommand { get; }
+    private List<Picture> _pictures;
     
-    public EditAlbumViewModel(NavigationStore navigationStore)
+    public EditAlbumViewModel(NavigationStore navigationStore, List<Picture> pictures)
     {
         NavigateAccountCommand = new NavigateCommand<GalleryViewModel>(navigationStore, () => new GalleryViewModel(navigationStore));
+        Pictures = pictures;
+    }
+    
+    public ICommand NavigateAccountCommand { get; }
+
+    public List<Picture> Pictures
+    {
+        get => _pictures;
+        set
+        {
+            _pictures = value;
+            OnPropertyChanged();
+        }
     }
 }

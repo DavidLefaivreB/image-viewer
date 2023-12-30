@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using ImageBrowser.Repository;
-using ImageBrowser.Repository.Sql;
+using ImageBrowser.Repository.InMemory;
 using ImageBrowser.Store;
 using ImageBrowser.ViewModel;
 
@@ -13,13 +13,13 @@ namespace ImageBrowser.UI
     {
         public MainWindow()
         {
-            InitializeComponent();
-
             var navigationStore = new NavigationStore();
-            navigationStore.CurrentViewModel = new EditAlbumViewModel(navigationStore);
-            
             DataContext = new MainViewModel(navigationStore);
-            RepositoryProvider.Instance.SetRepositoryFactory(new SqlRepositoryFactory());
+
+            RepositoryProvider.Instance.SetRepositoryFactory(new InMemoryRepositoryFactory());
+            navigationStore.CurrentViewModel = new EditAlbumViewModel(navigationStore, RepositoryProvider.Instance.getPictureRepository().RetrieveAll());
+            
+            InitializeComponent();
         }
     }
 }

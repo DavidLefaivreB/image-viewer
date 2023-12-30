@@ -1,4 +1,7 @@
-﻿namespace ImageBrowser.Repository;
+﻿using System.Collections.Generic;
+using ImageBrowser.Model;
+
+namespace ImageBrowser.Repository;
 
 public sealed class RepositoryProvider
 {
@@ -22,5 +25,10 @@ public sealed class RepositoryProvider
     internal CategoryRepository getCategoryRepository()
     {
         return _categoryRepository;
+    }
+
+    public PictureRepository getPictureRepository()
+    {
+        return _pictureRepository;
     }
 }

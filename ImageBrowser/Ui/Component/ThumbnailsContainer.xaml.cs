@@ -6,7 +6,7 @@ namespace ImageBrowser.Ui.Component
 {
     public partial class ThumbnailsContainer
     {
-        private List<PictureThumbnail> _thumbnails = new List<PictureThumbnail>();
+        private List<PictureThumbnail> _thumbnails = new();
 
         private double CurrentWindowWidth { get; set; }
 

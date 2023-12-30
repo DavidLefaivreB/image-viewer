@@ -35,13 +35,13 @@ public partial class EditAlbumView
 
         for (var i = 0; i < pictures.Count - 1; ++i)
         {
-            AddAlbumItemToRow(i);
+            AddAlbumItemToRow(i, pictures[i]);
 
             var separator = new Separator();
             AddSepartorToRow(separator, i);
         }
 
-        AddAlbumItemToRow((pictures.Count - 1) * 2);
+        AddAlbumItemToRow((pictures.Count - 1) * 2, pictures[^1]);
     }
 
     private void AddSepartorToRow(Separator separator, int i)
@@ -52,12 +52,12 @@ public partial class EditAlbumView
         ItemsGrid.Children.Add(separator);
     }
 
-    private void AddAlbumItemToRow(int i)
+    private void AddAlbumItemToRow(int rowIndex, Picture picture)
     {
-        var albumItem = new AlbumItem();
+        var albumItem = new AlbumItem(picture);
 
-        Grid.SetRow(albumItem, i * 2);
-        Grid.SetColumn(albumItem, i * 2);
+        Grid.SetRow(albumItem, rowIndex * 2);
+        Grid.SetColumn(albumItem, rowIndex * 2);
 
         ItemsGrid.Children.Add(albumItem);
     }

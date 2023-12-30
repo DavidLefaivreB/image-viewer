@@ -7,7 +7,7 @@
              x:Name="root"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
-    <ScrollViewer x:Name="scroller" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" Height="{Binding ElementName=root, Path=ActualHeight}">
+    <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto" Height="{Binding ElementName=root, Path=ActualHeight}">
         <component:ThumbnailsContainer x:Name="thumbnailContainer"
                                        VerticalAlignment="Top"
                                        HorizontalAlignment="Left"

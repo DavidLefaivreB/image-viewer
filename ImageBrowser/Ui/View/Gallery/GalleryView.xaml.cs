@@ -10,7 +10,7 @@ namespace ImageBrowser.Ui.View.Gallery;
 
 public partial class GalleryView : UserControl
 {
-    private PictureRepository _pictureRepository = new SqlPictureRepository();
+    private PictureRepository _pictureRepository = RepositoryProvider.Instance.getPictureRepository();
     private ThumbnailToDisplayNotifier _thumbnailToDisplayNotifier = new();
     private FranchiseRepository _franchiseRepository = new SqlFranchiseRepository();
 

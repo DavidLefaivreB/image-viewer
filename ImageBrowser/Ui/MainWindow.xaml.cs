@@ -18,7 +18,7 @@ namespace ImageBrowser.UI
             DataContext = new MainViewModel(navigationStore);
 
             RepositoryProvider.Instance.SetRepositoryFactory(new SqlRepositoryFactory());
-            navigationStore.CurrentViewModel = new EditAlbumViewModel(navigationStore, RepositoryProvider.Instance.getPictureRepository().RetrieveAll());
+            navigationStore.CurrentViewModel = new GalleryViewModel(navigationStore);
             
             InitializeComponent();
         }

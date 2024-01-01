@@ -1,8 +1,7 @@
-﻿using System;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace ImageBrowser.Ui.Component
+namespace ImageBrowser.Ui.Component.Tags
 {
     public partial class Tag : UserControl
     {

@@ -12,7 +12,6 @@ public partial class GalleryView : UserControl
 {
     private PictureRepository _pictureRepository = RepositoryProvider.Instance.getPictureRepository();
     private ThumbnailToDisplayNotifier _thumbnailToDisplayNotifier = new();
-    private FranchiseRepository _franchiseRepository = new SqlFranchiseRepository();
 
     public GalleryView()
     {
@@ -24,7 +23,6 @@ public partial class GalleryView : UserControl
 
         ThumbnailsController thumbnailsController = new ThumbnailsController(_pictureRepository, _thumbnailToDisplayNotifier);
         RightPanel.SetPictureRepository(thumbnailsController);
-        RightPanel.UpdateAvailableFranchises(_franchiseRepository.RetrieveAll());
     }
         
     private void AddPicture(object sender, RoutedEventArgs e)

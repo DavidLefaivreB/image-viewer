@@ -1,9 +1,10 @@
-﻿<UserControl x:Class="ImageBrowser.Ui.View.Gallery.RightPanel"
+﻿<UserControl x:Class="ImageBrowser.Ui.View.Gallery.GalleryFilterView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:component="clr-namespace:ImageBrowser.Ui.Component"
+             xmlns:tags="clr-namespace:ImageBrowser.Ui.Component.Tags"
              mc:Ignorable="d"
              d:DataContext="{Binding RelativeSource={RelativeSource Self}}"
              d:DesignHeight="600" d:DesignWidth="350">
@@ -18,31 +19,20 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="20" />
             <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="20" />
-            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Label
             Grid.Column="1"
             Grid.Row="1"
             Content="Category"
             Style="{StaticResource FontStyle}" />
-        <component:CategoryPanel x:Name="CategoryPanel" 
+        <component:CategoryPanel x:Name="CategoryPanel"
                                  Grid.Column="1" Grid.Row="2"
                                  CategoryChecked="OnCheckBoxChecked"
-                                 CategoryUnchecked="OnCheckBoxUnchecked"/>
-        <Label
-            Grid.Column="1"
-            Grid.Row="4"
-            Content="Franchise"
-            Style="{StaticResource FontStyle}" />
-        <component:AutoCompleteTextBox
-            x:Name="FranchiseTextBox"
-            Grid.Column="1"
-            Grid.Row="5"
-            Margin="5, 0, 20, 0"
-            Style="{StaticResource TextBoxStyle}"
-            KeyDown="OnFranchiseKeyDownHandler" />
-        <WrapPanel Grid.Column="1" Grid.Row="7" x:Name="TagsContainer" />
+                                 CategoryUnchecked="OnCheckBoxUnchecked" />
+        <tags:TagPanel Grid.Column="1" Grid.Row="4"
+                       Title="Franchise"
+                       Source="{Binding Franchises}"
+                       TagAdded="OnFranchiseAdded"
+                       TagRemoved="OnTagRemoved" />
     </Grid>
 </UserControl>

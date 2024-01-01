@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using ImageBrowser.Model;
@@ -14,13 +13,12 @@ public partial class EditAlbumView
         InitializeComponent();
     }
 
-    public static DependencyProperty SourceProperty =
-        DependencyProperty.Register("Source", typeof(List<Picture>), typeof(EditAlbumView), new PropertyMetadata(new List<Picture>(), OnSourceChanged));
+    public static readonly DependencyProperty SourceProperty = DependencyProperty.Register(nameof(Source), typeof(List<Picture>), typeof(EditAlbumView), new PropertyMetadata(new List<Picture>(), OnSourceChanged));
 
     public List<Picture> Source
     {
-        get { return (List<Picture>)base.GetValue(SourceProperty); }
-        set { base.SetValue(SourceProperty, value); }
+        get => (List<Picture>)GetValue(SourceProperty);
+        set => SetValue(SourceProperty, value);
     }
 
     private static void OnSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

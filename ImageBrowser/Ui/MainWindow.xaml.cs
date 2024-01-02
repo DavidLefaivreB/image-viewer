@@ -1,6 +1,6 @@
 ﻿using System.Windows;
+using ImageBrowser.Notifier;
 using ImageBrowser.Repository;
-using ImageBrowser.Repository.InMemory;
 using ImageBrowser.Repository.Sql;
 using ImageBrowser.Store;
 using ImageBrowser.ViewModel;
@@ -17,8 +17,10 @@ namespace ImageBrowser.UI
             var navigationStore = new NavigationStore();
             DataContext = new MainViewModel(navigationStore);
 
+            var notifier = new ThumbnailToDisplayNotifier();
+            
             RepositoryProvider.Instance.SetRepositoryFactory(new SqlRepositoryFactory());
-            navigationStore.CurrentViewModel = new GalleryViewModel(navigationStore);
+            navigationStore.CurrentViewModel = new GalleryViewModel(navigationStore, notifier, new SqlPictureRepository(), new SqlFranchiseRepository());
             
             InitializeComponent();
         }

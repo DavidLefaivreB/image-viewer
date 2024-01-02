@@ -12,7 +12,7 @@ public class EditAlbumViewModel : ViewModelBase
     
     public EditAlbumViewModel(NavigationStore navigationStore, List<Picture> pictures)
     {
-        NavigateAccountCommand = new NavigateCommand<GalleryViewModel>(navigationStore, () => new GalleryViewModel(navigationStore));
+        NavigateAccountCommand = new NavigateCommand<GalleryViewModel>(navigationStore, () => new GalleryViewModel(navigationStore, null, null, null));
         Pictures = pictures;
     }
     

@@ -3,10 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:ui="clr-namespace:ImageBrowser.Ui"
              xmlns:gallery="clr-namespace:ImageBrowser.Ui.View.Gallery"
+             xmlns:viewModel="clr-namespace:ImageBrowser.ViewModel"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300"
+             d:DataContext="{d:DesignInstance Type=viewModel:GalleryViewModel}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
@@ -22,9 +23,8 @@
                 <ColumnDefinition Width="*" MinWidth="300" />
             </Grid.ColumnDefinitions>
             <Rectangle Grid.Column="1" Fill="Black" />
-            <gallery:GalleryFilterView x:Name="RightPanel" Grid.Column="2" />
-
-            <ui:CentralPanel Grid.Column="0" x:Name="thumbnailPanel" />
+            <gallery:GalleryFilterView Grid.Column="2" DataContext="{Binding GalleryFilterViewDataContext}" />
+            <gallery:CentralPanel Grid.Column="0" Source="{Binding FilteredPictures}" />
 
             <GridSplitter Grid.Column="1"
                           HorizontalAlignment="Stretch"

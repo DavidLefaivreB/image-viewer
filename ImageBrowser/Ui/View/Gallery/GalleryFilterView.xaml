@@ -5,8 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:component="clr-namespace:ImageBrowser.Ui.Component"
              xmlns:tags="clr-namespace:ImageBrowser.Ui.Component.Tags"
+             xmlns:viewModel="clr-namespace:ImageBrowser.ViewModel"
              mc:Ignorable="d"
-             d:DataContext="{Binding RelativeSource={RelativeSource Self}}"
+             DataContextChanged="OnDataContextChanged"
+             d:DataContext="{d:DesignInstance Type=viewModel:GalleryFilterViewModel}"
              d:DesignHeight="600" d:DesignWidth="350">
     <Grid Background="Black">
         <Grid.ColumnDefinitions>

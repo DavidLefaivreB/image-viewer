@@ -36,13 +36,13 @@ public partial class EditAlbumView
             AddAlbumItemToRow(i, pictures[i]);
 
             var separator = new Separator();
-            AddSepartorToRow(separator, i);
+            AddSeparatorToRow(separator, i);
         }
 
         AddAlbumItemToRow((pictures.Count - 1) * 2, pictures[^1]);
     }
 
-    private void AddSepartorToRow(Separator separator, int i)
+    private void AddSeparatorToRow(Separator separator, int i)
     {
         Grid.SetRow(separator, i * 2 + 1);
         Grid.SetColumn(separator, i * 2 + 1);

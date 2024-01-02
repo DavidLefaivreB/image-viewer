@@ -10,9 +10,9 @@ public class EditAlbumViewModel : ViewModelBase
 {
     private List<Picture> _pictures;
     
-    public EditAlbumViewModel(NavigationStore navigationStore, List<Picture> pictures)
+    public EditAlbumViewModel(NavigationStore navigationStore, GalleryViewModel galleryViewModel, List<Picture> pictures)
     {
-        NavigateAccountCommand = new NavigateCommand<GalleryViewModel>(navigationStore, () => new GalleryViewModel(navigationStore, null, null, null));
+        NavigateAccountCommand = new NavigateCommand<GalleryViewModel>(navigationStore, () => galleryViewModel);
         Pictures = pictures;
     }
     

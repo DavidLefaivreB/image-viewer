@@ -37,5 +37,10 @@ namespace ImageBrowser.Ui.View.Gallery
         {
             _viewModel = DataContext as GalleryFilterViewModel;
         }
+        
+        private void OnAddButtonClick(object sender, RoutedEventArgs e)
+        {
+        
+        }
     }
 }

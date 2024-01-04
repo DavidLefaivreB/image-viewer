@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using ImageBrowser.Controller;
 using ImageBrowser.Notifier;
 using ImageBrowser.Repository;

@@ -11,9 +11,20 @@ public partial class CategoryPanel
     public CategoryPanel()
     {
         InitializeComponent();
-
-        var categoryRepository = RepositoryProvider.Instance.getCategoryRepository();
-        UpdateAvailableCategories(categoryRepository.RetrieveAll());
+    }
+    
+    public static readonly DependencyProperty ItemsProperty = DependencyProperty.Register(nameof(Items), typeof(List<string>), typeof(CategoryPanel), new PropertyMetadata(new List<string>(), OnItemsChanged));
+   
+    public List<string> Items
+    {
+        get => (List<string>)GetValue(ItemsProperty);
+        set => SetValue(ItemsProperty, value);
+    }
+    
+    private static void OnItemsChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    {
+        if (d is CategoryPanel panel)
+            panel.UpdateAvailableCategories(e.NewValue as List<string>);
     }
 
     private void UpdateAvailableCategories(List<string> categories)

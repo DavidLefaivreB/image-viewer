@@ -13,33 +13,33 @@ public partial class EditAlbumView
         InitializeComponent();
     }
 
-    public static readonly DependencyProperty SourceProperty = DependencyProperty.Register(nameof(Source), typeof(List<Picture>), typeof(EditAlbumView), new PropertyMetadata(new List<Picture>(), OnSourceChanged));
+    public static readonly DependencyProperty ItemsProperty = DependencyProperty.Register(nameof(Items), typeof(List<Picture>), typeof(EditAlbumView), new PropertyMetadata(new List<AlbumThumbnail>(), OnItemChanged));
 
-    public List<Picture> Source
+    public List<AlbumThumbnail> Items
     {
-        get => (List<Picture>)GetValue(SourceProperty);
-        set => SetValue(SourceProperty, value);
+        get => (List<AlbumThumbnail>)GetValue(ItemsProperty);
+        set => SetValue(ItemsProperty, value);
     }
 
-    private static void OnSourceChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    private static void OnItemChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
         var panel = d as EditAlbumView;
-        panel?.AddPicturesToGrid(e.NewValue as List<Picture>);
+        panel?.AddAlbumItemsToGrid(e.NewValue as List<AlbumThumbnail>);
     }
 
-    private void AddPicturesToGrid(List<Picture> pictures)
+    private void AddAlbumItemsToGrid(List<AlbumThumbnail> albumItem)
     {
-        AddGridRows(pictures.Count);
+        AddGridRows(albumItem.Count);
 
-        for (var i = 0; i < pictures.Count - 1; ++i)
+        for (var i = 0; i < albumItem.Count - 1; ++i)
         {
-            AddAlbumItemToRow(i, pictures[i]);
+            AddAlbumItemToRow(i, albumItem[i]);
 
             var separator = new Separator();
             AddSeparatorToRow(separator, i);
         }
 
-        AddAlbumItemToRow((pictures.Count - 1) * 2, pictures[^1]);
+        AddAlbumItemToRow((albumItem.Count - 1) * 2, albumItem[^1]);
     }
 
     private void AddSeparatorToRow(Separator separator, int i)
@@ -50,14 +50,12 @@ public partial class EditAlbumView
         ItemsGrid.Children.Add(separator);
     }
 
-    private void AddAlbumItemToRow(int rowIndex, Picture picture)
+    private void AddAlbumItemToRow(int rowIndex, AlbumThumbnail albumThumbnail)
     {
-        var albumItem = new AlbumItem(picture);
+        Grid.SetRow(albumThumbnail, rowIndex * 2);
+        Grid.SetColumn(albumThumbnail, rowIndex * 2);
 
-        Grid.SetRow(albumItem, rowIndex * 2);
-        Grid.SetColumn(albumItem, rowIndex * 2);
-
-        ItemsGrid.Children.Add(albumItem);
+        ItemsGrid.Children.Add(albumThumbnail);
     }
 
     private void AddGridRows(int nbItems)

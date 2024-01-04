@@ -33,7 +33,7 @@
                     <gallery:GalleryView />
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type local:EditAlbumViewModel}">
-                    <album:EditAlbumView Source="{Binding Pictures}" />
+                    <album:EditAlbumView Items="{Binding AlbumThumbnails}" />
                 </DataTemplate>
             </ContentControl.Resources>
         </ContentControl>

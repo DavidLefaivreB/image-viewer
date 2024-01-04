@@ -27,10 +27,10 @@
             Grid.Row="1"
             Content="Category"
             Style="{StaticResource FontStyle}" />
-        <component:CategoryPanel x:Name="CategoryPanel"
-                                 Grid.Column="1" Grid.Row="2"
+        <component:CategoryPanel Grid.Column="1" Grid.Row="2"
                                  CategoryChecked="OnCheckBoxChecked"
-                                 CategoryUnchecked="OnCheckBoxUnchecked" />
+                                 CategoryUnchecked="OnCheckBoxUnchecked"
+                                 Items="{Binding Categories}"/>
         <tags:TagPanel Grid.Column="1" Grid.Row="4"
                        Title="Franchise"
                        Source="{Binding Franchises}"

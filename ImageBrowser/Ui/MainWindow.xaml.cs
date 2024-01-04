@@ -18,15 +18,18 @@ namespace ImageBrowser.UI
             var navigationStore = new NavigationStore();
             DataContext = new MainViewModel(navigationStore);
 
+            var repositoryFactory = new SqlRepositoryFactory();
+            var pictureRepository = repositoryFactory.CreatePictureRepository();
+            var franchiseRepository = repositoryFactory.CreateFranchiseRepository();
+            var categoryRepository = repositoryFactory.CreateCategoryRepository();
+            
             var notifier = new ThumbnailToDisplayNotifier();
-            var pictureRepository = new SqlPictureRepository();
             var thumbnailsController = new ThumbnailsController(pictureRepository, notifier);
-            var galleryViewModel = new GalleryViewModel(navigationStore, new GalleryFilterViewModel(thumbnailsController, new SqlFranchiseRepository().RetrieveAll()));
+            var galleryViewModel = new GalleryViewModel(navigationStore, new GalleryFilterViewModel(thumbnailsController, categoryRepository.RetrieveAll(), franchiseRepository.RetrieveAll()));
             
             notifier.AddListener(galleryViewModel);
             notifier.Notify(pictureRepository.RetrieveAll());
             
-            RepositoryProvider.Instance.SetRepositoryFactory(new SqlRepositoryFactory());
             navigationStore.CurrentViewModel = galleryViewModel;
             
             InitializeComponent();

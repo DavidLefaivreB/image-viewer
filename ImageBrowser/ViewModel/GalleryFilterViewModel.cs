@@ -6,13 +6,15 @@ namespace ImageBrowser.ViewModel;
 public class GalleryFilterViewModel : ViewModelBase
 {
     private ThumbnailsController _thumbnailsController;
-
     
-    public GalleryFilterViewModel(ThumbnailsController thumbnailsController, List<string> franchises)
+    public GalleryFilterViewModel(ThumbnailsController thumbnailsController, List<string> categories, List<string> franchises)
     {
         _thumbnailsController = thumbnailsController;
+        Categories = categories;
         Franchises = franchises;
     }
+    
+    public List<string> Categories { get; set; }
     
     public List<string> Franchises { get; set; }
     

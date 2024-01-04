@@ -1,14 +1,15 @@
-﻿using System.Windows.Controls;
+﻿using System.Collections.Generic;
+using System.Windows.Controls;
 using System.Windows.Media;
 using ImageBrowser.Model;
 
 namespace ImageBrowser.Ui.Component;
 
-public partial class AlbumItem : UserControl
+public partial class AlbumThumbnail : UserControl
 {
     public string ThumbnailPath { get; set; }
     
-    public AlbumItem(Picture picture)
+    public AlbumThumbnail(Picture picture, List<string> categories)
     {
         InitializeComponent();
         DataContext = this;
@@ -16,5 +17,6 @@ public partial class AlbumItem : UserControl
         Background = Brushes.Transparent;
 
         ThumbnailPath = picture.ThumbnailPath;
+        CategoryPanel.Items = categories;
     }
 }

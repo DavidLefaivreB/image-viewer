@@ -34,4 +34,9 @@ public class GalleryViewModel : ViewModelBase, ThumbnailsListener
     {
         FilteredPictures = pictures;
     }
+
+    public void CreateNewAlbum()
+    {
+        
+    }
 }

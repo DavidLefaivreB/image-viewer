@@ -26,7 +26,7 @@ namespace ImageBrowser.UI
             
             var notifier = new ThumbnailToDisplayNotifier();
             var thumbnailsController = new ThumbnailsController(pictureRepository, notifier);
-            var galleryViewModel = new GalleryViewModel(navigationStore, new GalleryFilterViewModel(thumbnailsController, categoryRepository.RetrieveAll(), franchiseRepository.RetrieveAll(), CreateAlbum));
+            var galleryViewModel = new GalleryViewModel(navigationStore, new GalleryFilterViewModel(thumbnailsController, categoryRepository.RetrieveAll(), franchiseRepository.RetrieveAll()));
             
             notifier.AddListener(galleryViewModel);
             notifier.Notify(pictureRepository.RetrieveAll());

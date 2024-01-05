@@ -38,11 +38,5 @@
                        Source="{Binding Franchises}"
                        TagAdded="OnFranchiseAdded"
                        TagRemoved="OnTagRemoved" />
-        <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2"
-                Content="Add"
-                Margin="20, 0, 20, 20" 
-                BorderThickness="5"
-                Click="OnAddButtonClick"
-                Style="{StaticResource ButtonStyle}" />
     </Grid>
 </UserControl>

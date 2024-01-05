@@ -37,11 +37,5 @@ namespace ImageBrowser.Ui.View.Gallery
         {
             _viewModel = DataContext as GalleryFilterViewModel;
         }
-        
-        // Todo should not be here, to move in appropriate place
-        private void OnAddButtonClick(object sender, RoutedEventArgs e)
-        {
-            _viewModel.AddNewAlbum();
-        }
     }
 }

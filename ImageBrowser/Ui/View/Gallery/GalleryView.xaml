@@ -5,33 +5,36 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:gallery="clr-namespace:ImageBrowser.Ui.View.Gallery"
              xmlns:viewModel="clr-namespace:ImageBrowser.ViewModel"
+             DataContextChanged="OnDataContextChanged"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300"
+             d:DesignHeight="600" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance Type=viewModel:GalleryViewModel}">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Rectangle Fill="Black" />
-        <Rectangle Grid.Row="1"
-                   Fill="#242424" />
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100*" MinWidth="500" />
-                <ColumnDefinition Width="4" />
-                <ColumnDefinition Width="*" MinWidth="300" />
-            </Grid.ColumnDefinitions>
-            <Rectangle Grid.Column="1" Fill="Black" />
-            <gallery:GalleryFilterView Grid.Column="2" DataContext="{Binding GalleryFilterViewDataContext}" />
-            <gallery:CentralPanel Grid.Column="0" Source="{Binding FilteredPictures}" />
-
-            <GridSplitter Grid.Column="1"
-                          HorizontalAlignment="Stretch"
-                          VerticalAlignment="Stretch"
-                          Background="Black" />
-
-            <ContentControl Grid.Column="2" MinWidth="200" />
+    <Grid Background="#242424">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100*" MinWidth="500" />
+            <ColumnDefinition Width="4" />
+            <ColumnDefinition Width="*" MinWidth="300" />
+        </Grid.ColumnDefinitions>
+        <Rectangle Grid.Column="1" Fill="Black" />
+        <gallery:CentralPanel Grid.Column="0" Source="{Binding FilteredPictures}" />
+        <GridSplitter Grid.Column="1"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+                      Background="Black" />
+        <Grid Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <gallery:GalleryFilterView DataContext="{Binding GalleryFilterViewDataContext}" />
+            <Rectangle Grid.Row="1" Fill="Black" />
+            <Button Grid.Row="1" Grid.Column="0"
+                    Content="Add"
+                    Margin="20, 0, 20, 20" 
+                    BorderThickness="5"
+                    Click="OnAddButtonClick"
+                    Style="{StaticResource ButtonStyle}" />
         </Grid>
+        <ContentControl Grid.Column="2" MinWidth="200" />
     </Grid>
 </UserControl>

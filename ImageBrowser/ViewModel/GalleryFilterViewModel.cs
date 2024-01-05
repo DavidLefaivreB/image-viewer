@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using ImageBrowser.Controller;
 
 namespace ImageBrowser.ViewModel;
@@ -7,14 +6,12 @@ namespace ImageBrowser.ViewModel;
 public class GalleryFilterViewModel : ViewModelBase
 {
     private ThumbnailsController _thumbnailsController;
-    private readonly Action _createAlbumAction;
     
-    public GalleryFilterViewModel(ThumbnailsController thumbnailsController, List<string> categories, List<string> franchises, Action createAlbumAction)
+    public GalleryFilterViewModel(ThumbnailsController thumbnailsController, List<string> categories, List<string> franchises)
     {
         _thumbnailsController = thumbnailsController;
         Categories = categories;
         Franchises = franchises;
-        _createAlbumAction = createAlbumAction;
     }
     
     public List<string> Categories { get; set; }
@@ -39,11 +36,5 @@ public class GalleryFilterViewModel : ViewModelBase
     public void RemoveFranchise(string franchise)
     {
         _thumbnailsController.RemoveFranchise(franchise);
-    }
-
-    // Todo should not be here, the view for filtering picture to display should not contains logic to add new album
-    public void AddNewAlbum()
-    {
-        _createAlbumAction();
     }
 }

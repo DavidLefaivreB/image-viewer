@@ -26,7 +26,7 @@ namespace ImageBrowser.UI
             
             var notifier = new ThumbnailToDisplayNotifier();
             var thumbnailsController = new ThumbnailsController(pictureRepository, notifier);
-            var galleryViewModel = new GalleryViewModel(navigationStore, new GalleryFilterViewModel(thumbnailsController, categoryRepository.RetrieveAll(), franchiseRepository.RetrieveAll()));
+            var galleryViewModel = new GalleryViewModel(navigationStore, new GalleryFilterViewModel(thumbnailsController, categoryRepository.RetrieveAll(), franchiseRepository.RetrieveAll()), CreateAlbum);
             
             notifier.AddListener(galleryViewModel);
             notifier.Notify(pictureRepository.RetrieveAll());
@@ -39,10 +39,21 @@ namespace ImageBrowser.UI
         //Todo move logic into a class
         private void CreateAlbum()
         {
-            var window = new CreateAlbumWindow();
-            window.Owner = this;
-            window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            var window = new CreateAlbumWindow
+            {
+                Owner = this,
+                WindowStartupLocation = WindowStartupLocation.CenterOwner
+            };
+
             window.ShowDialog();
         }
     }
 }
+
+//            if (window.ShowDialog() == true)
+// {
+//
+//     var author = window.AuthorTextBox.Text;
+//     var name = window.NameTextBox.Text;
+//     var path = window.PathTextBox.Text;
+// }

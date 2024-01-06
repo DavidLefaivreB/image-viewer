@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Input;
 using ImageBrowser.Model;
 using ImageBrowser.Notifier;
@@ -8,10 +9,12 @@ namespace ImageBrowser.ViewModel;
 
 public class GalleryViewModel : ViewModelBase, ThumbnailsListener
 {
+    private readonly Action _createAlbum;
     private List<Picture> _filteredPictures = new();
     
-    public GalleryViewModel(NavigationStore navigationStore, GalleryFilterViewModel galleryFilterViewModel)
+    public GalleryViewModel(NavigationStore navigationStore, GalleryFilterViewModel galleryFilterViewModel, Action createAlbum)
     {
+        _createAlbum = createAlbum;
         // NavigateAccountCommand = new NavigateCommand<AccountViewModel>(navigationStore, () => new AccountViewModel(navigationStore));
         
         GalleryFilterViewDataContext = galleryFilterViewModel;
@@ -37,6 +40,6 @@ public class GalleryViewModel : ViewModelBase, ThumbnailsListener
 
     public void CreateNewAlbum()
     {
-        
+        _createAlbum.Invoke();
     }
 }

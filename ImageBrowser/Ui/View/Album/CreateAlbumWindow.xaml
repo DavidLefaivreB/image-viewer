@@ -7,10 +7,11 @@
         WindowStyle="None"
         AllowsTransparency="True"
         Background="#262626"
-        Height="150" Width="400">
+        Height="180" Width="400">
     <Border BorderThickness="1" BorderBrush="#444444" CornerRadius="8">
         <Grid Margin="10">
             <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
@@ -22,33 +23,48 @@
             </Grid.ColumnDefinitions>
             <Label Grid.Row="0"
                    Grid.Column="0"
+                   Content="Author:"
+                   VerticalAlignment="Center"
+                   Style="{StaticResource FontStyle}" />
+            <TextBox x:Name="AuthorTextBox"
+                     Grid.Row="0" Grid.Column="1"
+                     TextChanged="OnTextChanged"
+                     Style="{StaticResource TextBoxStyle}" />
+            <Label Grid.Row="1"
+                   Grid.Column="0"
                    Content="Name:"
                    VerticalAlignment="Center"
                    Style="{StaticResource FontStyle}" />
             <TextBox x:Name="NameTextBox"
-                     Grid.Row="0" Grid.Column="1"
+                     Grid.Row="1" Grid.Column="1"
+                     TextChanged="OnTextChanged"
                      Style="{StaticResource TextBoxStyle}" />
-            <Label Grid.Row="1"
+            <Label Grid.Row="2"
                    Grid.Column="0"
                    Content="Path:"
                    VerticalAlignment="Center"
                    Style="{StaticResource FontStyle}" />
             <TextBox x:Name="PathTextBox"
-                     Grid.Row="1" Grid.Column="1"
+                     Grid.Row="2" Grid.Column="1"
+                     TextChanged="OnTextChanged"
                      Style="{StaticResource TextBoxStyle}" />
-            <Button Grid.Row="1"
+            <Button Grid.Row="2"
                     Grid.Column="2"
                     Content="..."
                     Width="30"
                     Style="{StaticResource ButtonStyle}" />
-            <WrapPanel Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Right">
-                <Button Content="Create"
+            <WrapPanel Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" HorizontalAlignment="Right">
+                <Button x:Name="CreateButton"
+                        Content="Create"
                         Width="75"
                         Margin="30, 0"
+                        IsEnabled="False"
+                        IsDefault="True"
+                        Click="OnCreateButtonClick"
                         Style="{StaticResource ButtonStyle}" />
                 <Button Content="Cancel"
                         Width="75"
-                        Click="OnCancelButtonClick"
+                        IsCancel="True"
                         Style="{StaticResource ButtonStyle2}" />
             </WrapPanel>
         </Grid>

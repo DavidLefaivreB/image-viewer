@@ -1,59 +1,59 @@
-using System.Runtime.CompilerServices;
+using System.Collections.Generic;
+using System.IO;
 using System.Windows;
 using ImageBrowser.Controller;
+using ImageBrowser.Model;
 using ImageBrowser.Notifier;
 using ImageBrowser.Repository.Sql;
 using ImageBrowser.Store;
+using ImageBrowser.Ui.Component;
 using ImageBrowser.Ui.View.Album;
 using ImageBrowser.ViewModel;
 
-namespace ImageBrowser.UI
+namespace ImageBrowser.UI;
+
+/// <summary>
+/// Interaction logic for MainWindow.xaml
+/// </summary>
+public partial class MainWindow : Window
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
+    public MainWindow()
     {
-        public MainWindow()
+        var navigationStore = new NavigationStore();
+        DataContext = new MainViewModel(navigationStore);
+
+        var repositoryFactory = new SqlRepositoryFactory();
+        var pictureRepository = repositoryFactory.CreatePictureRepository();
+        var franchiseRepository = repositoryFactory.CreateFranchiseRepository();
+        var categoryRepository = repositoryFactory.CreateCategoryRepository();
+
+        var notifier = new ThumbnailToDisplayNotifier();
+        var thumbnailsController = new ThumbnailsController(pictureRepository, notifier);
+
+        var galleryFilterViewModel = new GalleryFilterViewModel(thumbnailsController, categoryRepository.RetrieveAll(), franchiseRepository.RetrieveAll());
+        var editAlbumViewModel = new EditAlbumViewModel(navigationStore, null, pictureRepository.RetrieveAll(), categoryRepository.RetrieveAll());
+        var galleryViewModel = new GalleryViewModel(galleryFilterViewModel, () => CreateAlbum(editAlbumViewModel, navigationStore));
+
+        notifier.AddListener(galleryViewModel);
+        notifier.Notify(pictureRepository.RetrieveAll());
+
+        navigationStore.CurrentViewModel = galleryViewModel;
+
+        InitializeComponent();
+    }
+
+    //Todo move logic into a class
+    private void CreateAlbum(EditAlbumViewModel editAlbumViewModel, NavigationStore navigationStore)
+    {
+        var window = new CreateAlbumWindow
         {
-            var navigationStore = new NavigationStore();
-            DataContext = new MainViewModel(navigationStore);
+            Owner = this,
+            WindowStartupLocation = WindowStartupLocation.CenterOwner
+        };
 
-            var repositoryFactory = new SqlRepositoryFactory();
-            var pictureRepository = repositoryFactory.CreatePictureRepository();
-            var franchiseRepository = repositoryFactory.CreateFranchiseRepository();
-            var categoryRepository = repositoryFactory.CreateCategoryRepository();
-            
-            var notifier = new ThumbnailToDisplayNotifier();
-            var thumbnailsController = new ThumbnailsController(pictureRepository, notifier);
-            var galleryViewModel = new GalleryViewModel(navigationStore, new GalleryFilterViewModel(thumbnailsController, categoryRepository.RetrieveAll(), franchiseRepository.RetrieveAll()), CreateAlbum);
-            
-            notifier.AddListener(galleryViewModel);
-            notifier.Notify(pictureRepository.RetrieveAll());
-            
-            navigationStore.CurrentViewModel = galleryViewModel;
-            
-            InitializeComponent();
-        }
-
-        //Todo move logic into a class
-        private void CreateAlbum()
+        if (window.ShowDialog() == true)
         {
-            var window = new CreateAlbumWindow
-            {
-                Owner = this,
-                WindowStartupLocation = WindowStartupLocation.CenterOwner
-            };
-
-            window.ShowDialog();
+            navigationStore.CurrentViewModel = editAlbumViewModel;
         }
     }
 }
-
-//            if (window.ShowDialog() == true)
-// {
-//
-//     var author = window.AuthorTextBox.Text;
-//     var name = window.NameTextBox.Text;
-//     var path = window.PathTextBox.Text;
-// }

@@ -13,6 +13,7 @@ public partial class CreateAlbumWindow : Window
 
     private void OnCreateButtonClick(object sender, RoutedEventArgs e)
     {
+        DialogResult = true;
         Close();
     }
 

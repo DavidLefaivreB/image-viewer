@@ -13,7 +13,7 @@ public partial class EditAlbumView
         InitializeComponent();
     }
 
-    public static readonly DependencyProperty ItemsProperty = DependencyProperty.Register(nameof(Items), typeof(List<Picture>), typeof(EditAlbumView), new PropertyMetadata(new List<AlbumThumbnail>(), OnItemChanged));
+    public static readonly DependencyProperty ItemsProperty = DependencyProperty.Register(nameof(Items), typeof(List<AlbumThumbnail>), typeof(EditAlbumView), new PropertyMetadata(new List<AlbumThumbnail>(), OnItemChanged));
 
     public List<AlbumThumbnail> Items
     {

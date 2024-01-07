@@ -1,7 +1,7 @@
 ﻿using System;
 using ImageBrowser.ViewModel;
 
-namespace ImageBrowser.Store;
+namespace ImageBrowser.Navigation;
 
 public class NavigationStore
 {

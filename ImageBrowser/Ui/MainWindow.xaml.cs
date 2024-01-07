@@ -1,12 +1,8 @@
-using System.Collections.Generic;
-using System.IO;
 using System.Windows;
 using ImageBrowser.Controller;
-using ImageBrowser.Model;
+using ImageBrowser.Navigation;
 using ImageBrowser.Notifier;
 using ImageBrowser.Repository.Sql;
-using ImageBrowser.Store;
-using ImageBrowser.Ui.Component;
 using ImageBrowser.Ui.View.Album;
 using ImageBrowser.ViewModel;
 
@@ -15,7 +11,7 @@ namespace ImageBrowser.UI;
 /// <summary>
 /// Interaction logic for MainWindow.xaml
 /// </summary>
-public partial class MainWindow : Window
+public partial class MainWindow
 {
     public MainWindow()
     {
@@ -30,10 +26,14 @@ public partial class MainWindow : Window
         var notifier = new ThumbnailToDisplayNotifier();
         var thumbnailsController = new ThumbnailsController(pictureRepository, notifier);
 
+        var navigationHandler = new NavigationHandler(navigationStore);
+        
         var galleryFilterViewModel = new GalleryFilterViewModel(thumbnailsController, categoryRepository.RetrieveAll(), franchiseRepository.RetrieveAll());
-        var editAlbumViewModel = new EditAlbumViewModel(navigationStore, null, pictureRepository.RetrieveAll(), categoryRepository.RetrieveAll());
-        var galleryViewModel = new GalleryViewModel(galleryFilterViewModel, () => CreateAlbum(editAlbumViewModel, navigationStore));
+        var editAlbumViewModel = new EditAlbumViewModel(pictureRepository.RetrieveAll(), categoryRepository.RetrieveAll());
+        var galleryViewModel = new GalleryViewModel(galleryFilterViewModel, () => CreateAlbum(navigationHandler));
 
+        navigationHandler.SetEditAlbumViewModel(editAlbumViewModel);
+        
         notifier.AddListener(galleryViewModel);
         notifier.Notify(pictureRepository.RetrieveAll());
 
@@ -43,7 +43,7 @@ public partial class MainWindow : Window
     }
 
     //Todo move logic into a class
-    private void CreateAlbum(EditAlbumViewModel editAlbumViewModel, NavigationStore navigationStore)
+    private void CreateAlbum(NavigationHandler navigationNotifier)
     {
         var window = new CreateAlbumWindow
         {
@@ -52,8 +52,6 @@ public partial class MainWindow : Window
         };
 
         if (window.ShowDialog() == true)
-        {
-            navigationStore.CurrentViewModel = editAlbumViewModel;
-        }
+            navigationNotifier.ShowEditAlbumView();
     }
 }

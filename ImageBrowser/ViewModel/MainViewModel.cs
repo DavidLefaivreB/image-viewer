@@ -1,4 +1,4 @@
-﻿using ImageBrowser.Store;
+﻿using ImageBrowser.Navigation;
 
 namespace ImageBrowser.ViewModel;
 

@@ -24,9 +24,12 @@ public partial class MainWindow
         var notifier = new ThumbnailToDisplayNotifier();
         var thumbnailsController = new ThumbnailsController(pictureRepository, notifier);
 
+        var navigationHandler = new NavigationHandler(navigationStore);
+        
         var galleryFilterViewModel = new GalleryFilterViewModel(thumbnailsController, categoryRepository.RetrieveAll(), franchiseRepository.RetrieveAll());
-        var navigationHandler = new NavigationHandler(navigationStore, pictureRepository.RetrieveAll(), categoryRepository.RetrieveAll(), galleryFilterViewModel);
-
+        var viewModelFactory = new ViewModelFactory(galleryFilterViewModel, navigationHandler, pictureRepository.RetrieveAll(), categoryRepository.RetrieveAll());
+        navigationHandler.ViewModelFactory = viewModelFactory;
+        
         notifier.Notify(pictureRepository.RetrieveAll());
 
         navigationHandler.ShowGalleryView();

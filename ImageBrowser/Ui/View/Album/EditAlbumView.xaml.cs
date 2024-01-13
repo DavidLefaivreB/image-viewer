@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using ImageBrowser.Model;
@@ -29,6 +30,9 @@ public partial class EditAlbumView
 
     private void AddAlbumItemsToGrid(List<AlbumThumbnail> albumItem)
     {
+        if (!albumItem.Any())
+            return;
+        
         AddGridRows(albumItem.Count);
 
         for (var i = 0; i < albumItem.Count - 1; ++i)

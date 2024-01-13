@@ -1,25 +1,32 @@
-﻿using ImageBrowser.ViewModel;
+﻿using System.Collections.Generic;
+using System.Windows.Forms;
+using ImageBrowser.Model;
+using ImageBrowser.ViewModel;
 
 namespace ImageBrowser.Navigation;
 
 public class NavigationHandler
 {
     private readonly NavigationStore _navigationStore;
+    private readonly List<Picture> _pictures;
+    private readonly List<string> _categories;
+    private readonly GalleryFilterViewModel _galleryFilterViewModel;
 
-    private EditAlbumViewModel _editAlbumViewModel;
-
-    public NavigationHandler(NavigationStore navigationStore)
+    public NavigationHandler(NavigationStore navigationStore, List<Picture> pictures, List<string> categories, GalleryFilterViewModel galleryFilterViewModel)
     {
         _navigationStore = navigationStore;
+        _pictures = pictures;
+        _categories = categories;
+        _galleryFilterViewModel = galleryFilterViewModel;
     }
     
-    public void ShowEditAlbumView()
+    public void ShowEditAlbumView(DialogResult albumFolder)
     {
-        _navigationStore.CurrentViewModel = _editAlbumViewModel;
+        _navigationStore.CurrentViewModel = new EditAlbumViewModel(this, _pictures, _categories);
     }
 
-    public void SetEditAlbumViewModel(EditAlbumViewModel editAlbumViewModel)
+    public void ShowGalleryView()
     {
-        _editAlbumViewModel = editAlbumViewModel;
+        _navigationStore.CurrentViewModel = new GalleryViewModel(_galleryFilterViewModel, this);
     }
 }

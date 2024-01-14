@@ -9,19 +9,16 @@ public class ViewModelFactory
 {
     private readonly GalleryFilterViewModel _galleryFilterViewModel;
     private readonly NavigationHandler _navigationHandler;
-    private readonly List<Picture> _pictures;
     private readonly List<string> _categories;
     private readonly ThumbnailToDisplayNotifier _notifier;
 
     public ViewModelFactory(GalleryFilterViewModel galleryFilterViewModel,
         NavigationHandler navigationHandler,
-        List<Picture> pictures,
         List<string> categories,
         ThumbnailToDisplayNotifier notifier)
     {
         _galleryFilterViewModel = galleryFilterViewModel;
         _navigationHandler = navigationHandler;
-        _pictures = pictures;
         _categories = categories;
         _notifier = notifier;
     }
@@ -37,6 +34,6 @@ public class ViewModelFactory
     public EditAlbumViewModel CreateEditAlbumViewModel()
     {
         _notifier.ClearListeners();
-        return new EditAlbumViewModel(_navigationHandler, _pictures, _categories);
+        return new EditAlbumViewModel(_navigationHandler, _categories);
     }
 }

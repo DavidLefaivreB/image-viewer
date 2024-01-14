@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows.Input;
 using ImageBrowser.Commands;
@@ -10,14 +11,17 @@ namespace ImageBrowser.ViewModel;
 
 public class EditAlbumViewModel : ViewModelBase
 {
+    static readonly List<string> SupportedExtension  = new() { ".jpg", ".jpeg", ".png" };
+    
+    private readonly List<string> _categories;
     private List<AlbumThumbnail> _albumThumbnails;
     
-    public EditAlbumViewModel(NavigationHandler navigationHandler, IEnumerable<Picture> pictures, List<string> categories)
+    public EditAlbumViewModel(NavigationHandler navigationHandler, List<string> categories)
     {
+        _categories = categories;
         SaveAlbumCommand = new CreateAlbumCommand(navigationHandler);
 
-        var albumThumbnails = pictures.Select(p => new AlbumThumbnail(p, categories)).ToList();
-        AlbumThumbnails = albumThumbnails;
+        AlbumThumbnails = new List<AlbumThumbnail>();
     }
     
     public ICommand SaveAlbumCommand { get; }
@@ -32,6 +36,13 @@ public class EditAlbumViewModel : ViewModelBase
         }
     }
 
+    public void UpdateAlbumFolder(string albumFolder)
+    {
+        var files = Directory.EnumerateFiles(albumFolder).Where(file => SupportedExtension.Contains(Path.GetExtension(file).ToLowerInvariant()));
+
+        AlbumThumbnails = files.Select(file => new AlbumThumbnail(new Picture("", file, file, "", "", ""), _categories)).ToList();
+    }
+    
     private class CreateAlbumCommand : CommandBases
     {
         private readonly NavigationHandler _navigationHandler;

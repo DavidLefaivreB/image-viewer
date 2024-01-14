@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Windows.Forms;
 using ImageBrowser.Model;
 using ImageBrowser.Navigation;
 using ImageBrowser.Notifier;
@@ -38,9 +39,9 @@ public class GalleryViewModel : ViewModelBase, ThumbnailsListener
 
     public void CreateNewAlbum()
     {
-        using var dialog = new System.Windows.Forms.FolderBrowserDialog();
+        using var dialog = new FolderBrowserDialog();
         
-        var albumFolder = dialog.ShowDialog();
-        _navigationHandler.ShowEditAlbumView(albumFolder);
+        if (dialog.ShowDialog() == DialogResult.OK)
+            _navigationHandler.ShowEditAlbumView(dialog.SelectedPath);
     }
 }

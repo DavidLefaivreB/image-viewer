@@ -27,7 +27,7 @@ public partial class MainWindow
         var navigationHandler = new NavigationHandler(navigationStore);
         
         var galleryFilterViewModel = new GalleryFilterViewModel(thumbnailsController, categoryRepository.RetrieveAll(), franchiseRepository.RetrieveAll());
-        var viewModelFactory = new ViewModelFactory(galleryFilterViewModel, navigationHandler, pictureRepository.RetrieveAll(), categoryRepository.RetrieveAll(), notifier);
+        var viewModelFactory = new ViewModelFactory(galleryFilterViewModel, navigationHandler, categoryRepository.RetrieveAll(), notifier);
         navigationHandler.ViewModelFactory = viewModelFactory;
         
         notifier.Notify(pictureRepository.RetrieveAll());

@@ -14,9 +14,11 @@ public class NavigationHandler
         _navigationStore = navigationStore;
     }
 
-    public void ShowEditAlbumView(DialogResult albumFolder)
+    public void ShowEditAlbumView(string albumFolder)
     {
-        _navigationStore.CurrentViewModel = ViewModelFactory.CreateEditAlbumViewModel();
+        var viewModel = ViewModelFactory.CreateEditAlbumViewModel();
+        viewModel.UpdateAlbumFolder(albumFolder);
+        _navigationStore.CurrentViewModel = viewModel;
     }
 
     public void ShowGalleryView()

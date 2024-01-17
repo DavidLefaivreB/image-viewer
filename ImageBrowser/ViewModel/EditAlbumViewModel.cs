@@ -11,11 +11,11 @@ namespace ImageBrowser.ViewModel;
 
 public class EditAlbumViewModel : ViewModelBase
 {
-    static readonly List<string> SupportedExtension  = new() { ".jpg", ".jpeg", ".png" };
-    
+    static readonly List<string> SupportedExtension = new() { ".jpg", ".jpeg", ".png" };
+
     private readonly List<string> _categories;
     private List<AlbumThumbnail> _albumThumbnails;
-    
+
     public EditAlbumViewModel(NavigationHandler navigationHandler, List<string> categories)
     {
         _categories = categories;
@@ -23,7 +23,7 @@ public class EditAlbumViewModel : ViewModelBase
 
         AlbumThumbnails = new List<AlbumThumbnail>();
     }
-    
+
     public ICommand SaveAlbumCommand { get; }
 
     public List<AlbumThumbnail> AlbumThumbnails
@@ -39,10 +39,9 @@ public class EditAlbumViewModel : ViewModelBase
     public void UpdateAlbumFolder(string albumFolder)
     {
         var files = Directory.EnumerateFiles(albumFolder).Where(file => SupportedExtension.Contains(Path.GetExtension(file).ToLowerInvariant()));
-
-        AlbumThumbnails = files.Select(file => new AlbumThumbnail(new Picture("", file, file, "", "", ""), _categories)).ToList();
+        AlbumThumbnails = files.Select(file => new AlbumThumbnail(file, _categories)).ToList();
     }
-    
+
     private class CreateAlbumCommand : CommandBases
     {
         private readonly NavigationHandler _navigationHandler;
@@ -51,7 +50,7 @@ public class EditAlbumViewModel : ViewModelBase
         {
             _navigationHandler = navigationHandler;
         }
-        
+
         public override void Execute(object parameter)
         {
             _navigationHandler.ShowGalleryView();

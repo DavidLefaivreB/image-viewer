@@ -3,8 +3,8 @@ using System.IO;
 using System.Linq;
 using System.Windows.Input;
 using ImageBrowser.Commands;
-using ImageBrowser.Model;
 using ImageBrowser.Navigation;
+using ImageBrowser.Thumbnail;
 using ImageBrowser.Ui.Component;
 
 namespace ImageBrowser.ViewModel;
@@ -15,10 +15,12 @@ public class EditAlbumViewModel : ViewModelBase
 
     private readonly List<string> _categories;
     private List<AlbumThumbnail> _albumThumbnails;
+    private FileThumbnailController _fileThumbnailController;
 
-    public EditAlbumViewModel(NavigationHandler navigationHandler, List<string> categories)
+    public EditAlbumViewModel(NavigationHandler navigationHandler, List<string> categories, FileThumbnailController fileThumbnailController)
     {
         _categories = categories;
+        _fileThumbnailController = fileThumbnailController;
         SaveAlbumCommand = new CreateAlbumCommand(navigationHandler);
 
         AlbumThumbnails = new List<AlbumThumbnail>();
@@ -38,8 +40,10 @@ public class EditAlbumViewModel : ViewModelBase
 
     public void UpdateAlbumFolder(string albumFolder)
     {
-        var files = Directory.EnumerateFiles(albumFolder).Where(file => SupportedExtension.Contains(Path.GetExtension(file).ToLowerInvariant()));
-        AlbumThumbnails = files.Select(file => new AlbumThumbnail(file, _categories)).ToList();
+        var files = Directory.EnumerateFiles(albumFolder).Where(file => SupportedExtension.Contains(Path.GetExtension(file).ToLowerInvariant())).ToList();
+        _fileThumbnailController.CreateThumbnailsFor(files);
+        
+        AlbumThumbnails = files.Select(file => new AlbumThumbnail(_fileThumbnailController.GetFor(file), _categories)).ToList();
     }
 
     private class CreateAlbumCommand : CommandBases

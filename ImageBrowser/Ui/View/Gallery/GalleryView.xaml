@@ -16,7 +16,7 @@
             <ColumnDefinition Width="*" MinWidth="300" />
         </Grid.ColumnDefinitions>
         <Rectangle Grid.Column="1" Fill="Black" />
-        <gallery:CentralPanel Grid.Column="0" Source="{Binding FilteredPictures}" />
+        <gallery:CentralPanel Grid.Column="0" Source="{Binding FilteredPictures}" AllowDrop="True" PreviewDrop="OnDropPreview" PreviewDragOver="OnPreviewDragOver" />
         <GridSplitter Grid.Column="1"
                       HorizontalAlignment="Stretch"
                       VerticalAlignment="Stretch"

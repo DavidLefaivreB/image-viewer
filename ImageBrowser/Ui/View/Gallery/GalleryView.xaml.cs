@@ -28,6 +28,8 @@ public partial class GalleryView
     {
         if (null != e.Data && e.Data.GetDataPresent(DataFormats.FileDrop))
         {
+            if (e.Data.GetData(DataFormats.FileDrop) is string[] files)
+                ViewModel.AddFilesToGallery(files.ToList());
         }
     }
 

@@ -6,13 +6,12 @@ using ImageBrowser.Commands;
 using ImageBrowser.Navigation;
 using ImageBrowser.Thumbnail;
 using ImageBrowser.Ui.Component;
+using ImageBrowser.Utils;
 
 namespace ImageBrowser.ViewModel;
 
 public class EditAlbumViewModel : ViewModelBase
 {
-    static readonly List<string> SupportedExtension = new() { ".jpg", ".jpeg", ".png" };
-
     private readonly List<string> _categories;
     private List<AlbumThumbnail> _albumThumbnails;
     private FileThumbnailController _fileThumbnailController;
@@ -40,7 +39,7 @@ public class EditAlbumViewModel : ViewModelBase
 
     public void UpdateAlbumFolder(string albumFolder)
     {
-        var files = Directory.EnumerateFiles(albumFolder).Where(file => SupportedExtension.Contains(Path.GetExtension(file).ToLowerInvariant())).ToList();
+        var files = FileExtensionUtils.RetrieveValidExtensionFiles(Directory.EnumerateFiles(albumFolder));
         _fileThumbnailController.CreateThumbnailsFor(files);
         
         AlbumThumbnails = files.Select(file => new AlbumThumbnail(_fileThumbnailController.GetFor(file), _categories)).ToList();

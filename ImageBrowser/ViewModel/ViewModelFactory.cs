@@ -28,7 +28,7 @@ public class ViewModelFactory
 
     public GalleryViewModel CreateGalleryViewModel()
     {
-        var galleryViewModel = new GalleryViewModel(_galleryFilterViewModel, _navigationHandler);
+        var galleryViewModel = new GalleryViewModel(_galleryFilterViewModel, _navigationHandler, _fileThumbnailController);
         _notifier.AddListener(galleryViewModel);
         
         return galleryViewModel;

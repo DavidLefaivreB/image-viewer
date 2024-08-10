@@ -4,6 +4,7 @@ using ImageBrowser.Model;
 using ImageBrowser.Navigation;
 using ImageBrowser.Notifier;
 using ImageBrowser.Thumbnail;
+using ImageBrowser.UI;
 using ImageBrowser.Utils;
 
 namespace ImageBrowser.ViewModel;
@@ -14,12 +15,17 @@ public class GalleryViewModel : ViewModelBase, ThumbnailsListener
 
     private List<Picture> _filteredPictures = new();
     private readonly FileThumbnailController _fileThumbnailController;
+    private readonly MainWindow.IShowAddPicturesWindowAction _action;
 
-    public GalleryViewModel(GalleryFilterViewModel galleryFilterViewModel, NavigationHandler navigationHandler, FileThumbnailController fileThumbnailController)
+    public GalleryViewModel(GalleryFilterViewModel galleryFilterViewModel, 
+        NavigationHandler navigationHandler, 
+        FileThumbnailController fileThumbnailController,
+        MainWindow.IShowAddPicturesWindowAction action)
     {
         GalleryFilterViewDataContext = galleryFilterViewModel;
         _navigationHandler = navigationHandler;
         _fileThumbnailController = fileThumbnailController;
+        _action = action;
     }
 
     public object GalleryFilterViewDataContext { get; }
@@ -42,7 +48,7 @@ public class GalleryViewModel : ViewModelBase, ThumbnailsListener
     public void CreateNewAlbum()
     {
         using var dialog = new FolderBrowserDialog();
-        
+
         if (dialog.ShowDialog() == DialogResult.OK)
             _navigationHandler.ShowEditAlbumView(dialog.SelectedPath);
     }
@@ -54,6 +60,7 @@ public class GalleryViewModel : ViewModelBase, ThumbnailsListener
         if (pictureFiles.Count > 0)
         {
             _fileThumbnailController.CreateThumbnailsFor(pictureFiles);
+            _action.Show(pictureFiles);
         }
     }
 }
